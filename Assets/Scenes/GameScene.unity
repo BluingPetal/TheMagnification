@@ -4895,6 +4895,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSensitivity: 100
+  zoomSpeed: 100
+  maxPos: {x: 60, y: 40}
+  minPos: {x: 0, y: -40}
+  maxZoom: 20
+  minZoom: -15
 --- !u!1001 &983829256
 PrefabInstance:
   m_ObjectHideFlags: 0

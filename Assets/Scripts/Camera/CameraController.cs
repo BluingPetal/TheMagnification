@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     // 터치하고 왼쪽으로 하면 화면 오른쪽으로 이동하기
     // 최대 최소 설정하기
     private bool controllable;
-    private float totalY = 0;
 
     [SerializeField]
     private float moveSensitivity;

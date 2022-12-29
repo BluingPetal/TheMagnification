@@ -32,7 +32,7 @@ public class SingleTon<T> : MonoBehaviour where T : MonoBehaviour
         if (instance == null)
         {
             instance = this as T;
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

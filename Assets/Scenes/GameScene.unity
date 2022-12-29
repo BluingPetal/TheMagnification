@@ -203,8 +203,9 @@ GameObject:
   - component: {fileID: 267008590}
   - component: {fileID: 267008589}
   - component: {fileID: 267008588}
+  - component: {fileID: 267008591}
   m_Layer: 5
-  m_Name: Button
+  m_Name: MagnifyGlassButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +275,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 267008589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 267008591}
+        m_TargetAssemblyTypeName: MagnifyGlassUI, Assembly-CSharp
+        m_MethodName: GlassControl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &267008589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +326,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267008586}
   m_CullTransparentMesh: 1
+--- !u!114 &267008591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267008586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8703b2913e88ed34dbd71ab62df43764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagnifyGlassCam: {fileID: 797400091}
 --- !u!1 &536621191
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +709,6 @@ GameObject:
   m_Component:
   - component: {fileID: 999685949}
   - component: {fileID: 999685951}
-  - component: {fileID: 999685952}
   m_Layer: 0
   m_Name: GlassCam
   m_TagString: Untagged
@@ -749,18 +774,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &999685952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999685948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b7fcade3d9e914fb6d60212085f471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1107327774
 GameObject:
   m_ObjectHideFlags: 0

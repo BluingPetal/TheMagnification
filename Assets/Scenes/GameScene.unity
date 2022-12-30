@@ -4615,7 +4615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glassCam: {fileID: 999685951}
-  zoomParameter: 30
+  zoomParameter: 10
   mouseSensitivity: 45
 --- !u!95 &916002962
 Animator:
@@ -4926,8 +4926,8 @@ MonoBehaviour:
   zoomSpeed: 100
   maxPos: {x: 60, y: 40}
   minPos: {x: 0, y: -40}
-  maxZoom: 20
-  minZoom: -15
+  maxZoom: 50
+  minZoom: 0
 --- !u!1001 &983829256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7511,7 +7511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8155524582437955516, guid: d78c04097b86ec24db7fb8c4a4af5bc8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.7
+      value: 48.5
       objectReference: {fileID: 0}
     - target: {fileID: 8155524582437955516, guid: d78c04097b86ec24db7fb8c4a4af5bc8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8582,6 +8582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightWayPoints
       objectReference: {fileID: 0}
+    - target: {fileID: 8577089096083085250, guid: 309c8b6236a28ce42ba5d16d45cdbe89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8577089096083085251, guid: 309c8b6236a28ce42ba5d16d45cdbe89, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -8790,6 +8794,8 @@ MonoBehaviour:
   - {fileID: 8577089096083085251, guid: 309c8b6236a28ce42ba5d16d45cdbe89, type: 3}
   flyingWay:
   - {fileID: 4526173739439842245, guid: 6c1371259a44a584589207c0c161bcd8, type: 3}
+  walkingWayName: []
+  flyingWayName: []
 --- !u!1001 &1808395626
 PrefabInstance:
   m_ObjectHideFlags: 0

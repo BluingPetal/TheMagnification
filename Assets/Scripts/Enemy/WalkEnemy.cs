@@ -18,16 +18,26 @@ public class WalkEnemy : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        // TODO : 랜덤 위치 구현
-        randNum = Random.Range(0, 1);
+    }
+
+    private void Start()
+    {
+        // TODO : 랜덤 위치에서 스폰되도록 구현
+        //randNum = Random.Range(0, 2);
+        randNum = 1;
         agent.speed = speed;
         Debug.Log(string.Format("{0}번째 길을 선택", randNum));
+        agent.destination = WayManager.Instance.WalkingWayPoints[randNum][currentIndex].position;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger entered");
-        Debug.Log(currentIndex.ToString());
+        // wayPoints의 부모와 이름이 같은 경우만 충돌
+        if (other.gameObject.transform.parent.name != WayManager.Instance.WalkingWayName[randNum])
+            return;
+
+        Debug.Log("move to next");
+
         if (other.gameObject.layer == LayerMask.NameToLayer("WayPoints"))
         {
             if (currentIndex >= WayManager.Instance.WalkingWayPoints[randNum].Count - 1)

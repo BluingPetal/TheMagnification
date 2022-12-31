@@ -2,35 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
-enum CarState { Normal, Attack }
-
-public class Cars : WalkEnemy
+enum HumanoidEnemyState { Walk, Attack }
+public class HumanoidEnemies : WalkEnemy
 {
-    private CarState state;
-    private Transform target;
-    protected GameObject bulletPrefab;
+    protected Animator animator;
+
+    private HumanoidEnemyState state;
+    protected Transform target;
     private Coroutine attackCoroutine;
 
     private float minSqrDistance;
     private bool isAttack;
     private bool isFound;
 
-    [Header("Settings")]
-    [SerializeField]
-    protected Animator animator;
-    [SerializeField]
-    protected Shooter shooter;
-    [SerializeField]
-    protected Transform topTransform;
-    [SerializeField]
-    protected Transform bottomTransform;
+    protected override void Awake()
+    {
+        base.Awake();
+        animator = GetComponent<Animator>();
+    }
 
     protected override void Start()
     {
         base.Start();
-        state = CarState.Normal;
+        state = HumanoidEnemyState.Walk;
         target = null;
         isAttack = false;
         isFound = false;
@@ -47,20 +42,20 @@ public class Cars : WalkEnemy
     {
         switch (state)
         {
-            case CarState.Normal:
+            case HumanoidEnemyState.Walk:
                 agent.isStopped = false;
                 // 타겟이 있으면 attack state로 이동
                 if (target != null)
-                    state = CarState.Attack;
+                    state = HumanoidEnemyState.Attack;
                 break;
 
-            case CarState.Attack:
+            case HumanoidEnemyState.Attack:
                 agent.isStopped = true;
                 // 타겟이 없으면 attack state로 이동
                 if (target == null)
                 {
                     Debug.Log("nullTarget");
-                    state = CarState.Normal;
+                    state = HumanoidEnemyState.Walk;
                     StopCoroutine(attackCoroutine);
                     animator.SetTrigger("StateChanged");
                     isAttack = false;
@@ -120,7 +115,7 @@ public class Cars : WalkEnemy
                 if (!target.IsDestroyed())
                 {
                     // target에게만 lookAt
-                    topTransform.LookAt(target.position);
+                    transform.LookAt(target.position);
                     // 타겟을 향한 ray 그리기
                     Vector3 directionToFinalTarget = (target.gameObject.transform.position - this.transform.position).normalized;
                     Debug.DrawRay(transform.position, directionToFinalTarget * attackRange);
@@ -152,14 +147,13 @@ public class Cars : WalkEnemy
 
     protected override void Attack()
     {
-        if(target != null)
+        if (target != null)
         {
             // 타겟을 바로 공격하면 bullet과 싱크가 맞지 않으므로, bullet script에서 처리
             //IDamageable damageableTarget = target.gameObject.GetComponent<IDamageable>();
             //damageableTarget.TakeDamage(attackPower);
 
             // 총알 생성은 shooter가 함
-            shooter.Shoot(bulletPrefab, attackPower);
             animator.SetTrigger("Attack");
         }
     }

@@ -71,5 +71,7 @@ public class WalkEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    virtual protected void Attack() { }
+    virtual protected void Attack()
+    {
+    }
 }   

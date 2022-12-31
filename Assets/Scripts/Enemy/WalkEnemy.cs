@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,13 +6,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class WalkEnemy : MonoBehaviour
 {
-    protected NavMeshAgent agent;
-    private int currentIndex = 0;
-    private int randNum;
-
+    // scriptableObject에 공통적으로 있는 정보들
     protected new string name;
     protected string description;
     protected Sprite icon;
@@ -23,33 +20,56 @@ public class WalkEnemy : MonoBehaviour
     protected float attackRoutine;
     protected float attackPower;
 
-    virtual protected void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
+    // class 변수
+    private int startWayNum;
+    private int nextIndex;
+    private Vector3 nextPos;
+
+    // child에서 쓰이는 변수
+    protected Transform target;
+    protected bool isMove;
 
     virtual protected void Start()
     {
-        // TODO : 랜덤 위치에서 스폰되도록 구현
+        // TODO : 정해진 위치에서 스폰되도록 구현
         //randNum = Random.Range(0, 2);
-        randNum = 1;
-        agent.speed = speed;
-        Debug.Log(string.Format("{0}번째 길을 선택", randNum));
+        startWayNum = 1;
+        Debug.Log(string.Format("{0}번째 길을 선택", startWayNum));
+        nextIndex = 0;
+        nextPos = WayManager.Instance.WalkingWayPoints[startWayNum][nextIndex].position;
+        isMove = true;
+        target = null;
         //agent.destination = WayManager.Instance.WalkingWayPoints[randNum][currentIndex].position;
+    }
+
+    virtual protected void Update()
+    {
+        if (!isMove)
+            Move();
+    }
+
+    protected void Move()
+    {
+        Vector3 moveDir = new Vector3(nextPos.x - transform.position.x, 0, nextPos.z - transform.position.z).normalized;
+        Vector3 lookPos = new Vector3(nextPos.x, transform.position.y, nextPos.z);
+        transform.Translate(moveDir * speed * Time.deltaTime, Space.World);
+        transform.LookAt(lookPos);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // wayPoints의 부모와 이름이 같은 경우만 충돌
-        if (other.gameObject.transform.parent.name != WayManager.Instance.WalkingWayName[randNum])
+        if (other.gameObject.transform.parent.name != WayManager.Instance.WalkingWayName[startWayNum])
+            return;
+        // layer가 WayPoints인 경우만 충돌
+        if (other.gameObject.layer != LayerMask.NameToLayer("WayPoints"))
             return;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("WayPoints"))
+        if (nextIndex >= WayManager.Instance.WalkingWayPoints[startWayNum].Count - 1)
+            ArrivedEndPoint();
+        else
         {
-            if (currentIndex >= WayManager.Instance.WalkingWayPoints[randNum].Count - 1)
-                ArrivedEndPoint();
-            else
-                SetNextPoint();
+            SetNextPoint();
         }
     }
 
@@ -61,8 +81,8 @@ public class WalkEnemy : MonoBehaviour
 
     private void SetNextPoint()
     {
-        currentIndex++;
-        agent.destination = WayManager.Instance.WalkingWayPoints[randNum][currentIndex].position;
+        nextIndex++;
+        nextPos = WayManager.Instance.WalkingWayPoints[startWayNum][nextIndex].position;
     }
     
     virtual protected void ArrivedEndPoint()

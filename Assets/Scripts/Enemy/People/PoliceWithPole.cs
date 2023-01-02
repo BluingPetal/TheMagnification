@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PoliceWithPole : HumanoidEnemies
 {
     [SerializeField]
     private PoliceWithPoleData data;
+    [SerializeField]
+    private float nearAttackTargetDistance;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         name = data.name;
         description = data.description;
         icon = data.icon;
@@ -23,33 +25,51 @@ public class PoliceWithPole : HumanoidEnemies
         attackPower = data.attackPower;
     }
 
-    protected override void Update()
+    protected override void Move()
     {
-        if (isMove)
-            Move();
-        else
+        if (state == HumanoidEnemyState.Walk)
+            base.Move();
+        // 근접 공격 오브젝트는 적을 감지한 경우 적쪽으로 달려감
+        else if (state == HumanoidEnemyState.WalkToTarget)
             MoveToTarget();
     }
+
+    private void MoveToTarget()
+    {
+        if (target != null)
+        {
+            // target쪽으로 이동
+            Vector3 posDiffWithTarget = target.position - this.transform.position;
+            Vector3 dirToTargetWithoutY = new Vector3(posDiffWithTarget.x, 0, posDiffWithTarget.z).normalized;
+            transform.Translate(dirToTargetWithoutY * speed * Time.deltaTime, Space.World);
+        }
+    }
+
+    protected override void FindTarget()
+    {
+        base.FindTarget();
+        if (target != null)
+        {
+            // 근접 공격 오브젝트는 자신보다 위에 있는 적을 감지할 수 없음
+            if ((target.position.y - transform.position.y) > (GetComponent<CapsuleCollider>().height + 0.5f))
+            {
+                target = null;
+            }
+        }
+    }
+
     protected override void StateUpdate()
     {
         switch (state)
         {
             case HumanoidEnemyState.Walk:
-                // 타겟이 있으면 attack state로 이동
-                // 근접 공격을 하는 오브젝트는 다르게 처리
-                if (target != null && this.name == "PoliceWithPole")
-                {
-                    state = HumanoidEnemyState.WalkToTarget;
-                    isMove = false;
-                    animator.SetTrigger("Attackable");
-                    break;
-                }
+                // 타겟이 있으면 walkToTarget state로 이동
                 if (target != null)
                 {
-                    state = HumanoidEnemyState.Attack;
-                    isMove = false;
+                    state = HumanoidEnemyState.WalkToTarget;
+                    animator.SetTrigger("Attackable");
                     break;
-                }
+                }                
                 break;
 
             case HumanoidEnemyState.WalkToTarget:
@@ -57,12 +77,12 @@ public class PoliceWithPole : HumanoidEnemies
                 {
                     // target쪽으로 가다가 target이 없어진 경우 처리
                     state = HumanoidEnemyState.Walk;
-                    isMove = true;
-                    animator.SetTrigger("StateChanged");
+                    animator.SetTrigger("Walk");
                     break;
                 }
-                float sqrdistanceToTarget = (target.position - this.transform.position).sqrMagnitude;
-                if (sqrdistanceToTarget <= 2f)
+                Vector3 posDiffWithTarget1 = target.position - this.transform.position;
+                float sqrdistanceToTarget1 = new Vector3(posDiffWithTarget1.x, 0, posDiffWithTarget1.z).sqrMagnitude;
+                if (sqrdistanceToTarget1 < nearAttackTargetDistance)
                 {
                     state = HumanoidEnemyState.Attack;
                     isMove = false;
@@ -76,31 +96,40 @@ public class PoliceWithPole : HumanoidEnemies
                 // 타겟이 없으면 walk state로 이동
                 if (target == null)
                 {
-                    Debug.Log("nullTarget");
                     state = HumanoidEnemyState.Walk;
+                    animator.SetTrigger("Walk");
                     isMove = true;
                     StopCoroutine(attackCoroutine);
-                    animator.SetTrigger("StateChanged");
+                    transform.LookAt(nextPos);
+                    break;
+                }
+                Vector3 posDiffWithTarget2 = target.position - this.transform.position;
+                float sqrdistanceToTarget2 = new Vector3(posDiffWithTarget2.x, 0, posDiffWithTarget2.z).sqrMagnitude;
+                if (sqrdistanceToTarget2 >= nearAttackTargetDistance)
+                {
+                    state = HumanoidEnemyState.WalkToTarget;
+                    isMove = true;
+                    StopCoroutine(attackCoroutine);
+                    animator.SetTrigger("ChangeTarget");
                     break;
                 }
                 break;
         }
     }
 
-    private void MoveToTarget()
+    protected override void Attack()
     {
-        if (state == HumanoidEnemyState.WalkToTarget && target != null)
-        {
-            // target쪽으로 이동
-            Vector3 posDiffWithTarget = target.position - this.transform.position;
-            Vector3 dirToTargetWithoutY = new Vector3(posDiffWithTarget.x, 0, posDiffWithTarget.z).normalized;
-            transform.Translate(dirToTargetWithoutY * speed * Time.deltaTime, Space.World);
-        }
+        // Attack 애니메이션에서 Animation Event를 통해 target에게 데미지가 들어가도록 구현
+        if (target != null)
+            animator.SetTrigger("Attack");
     }
 
-    protected void GiveDamage()
+    protected void GiveDamage() // Animation Event에서 호출될 함수
     {
-        IDamageable damageable = target.GetComponent<IDamageable>();
-        damageable?.TakeDamage(attackPower);
+        if (target != null)
+        {
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            damageable?.TakeDamage(attackPower);
+        }
     }
 }

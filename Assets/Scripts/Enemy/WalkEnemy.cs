@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
+using TowerDefense.Towers;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,61 +22,66 @@ public class WalkEnemy : MonoBehaviour
     protected float attackPower;
 
     // class 변수
-    private int startWayNum;
-    private int nextIndex;
-    private Vector3 nextPos;
+    private int startWayNum;        // 경로 종류
+    private int nextIndex;          // 향하고 있는 인덱스
+    protected Vector3 nextPos;      // 향하고 있는 인덱스의 위치
+    [SerializeField]
+    private float rotationSpeed;
 
     // child에서 쓰이는 변수
     protected Transform target;
     protected bool isMove;
 
+    // Properties
+    public Vector3 CurPos { get { return this.transform.position; } }
+
     virtual protected void Start()
     {
         // TODO : 정해진 위치에서 스폰되도록 구현
-        //randNum = Random.Range(0, 2);
         startWayNum = 1;
-        Debug.Log(string.Format("{0}번째 길을 선택", startWayNum));
+        //Debug.Log(string.Format("{0}번째 길을 선택", startWayNum));
         nextIndex = 0;
         nextPos = WayManager.Instance.WalkingWayPoints[startWayNum][nextIndex].position;
         isMove = true;
         target = null;
-        //agent.destination = WayManager.Instance.WalkingWayPoints[randNum][currentIndex].position;
     }
 
     virtual protected void Update()
     {
-        if (!isMove)
+        if (isMove)
             Move();
     }
 
-    protected void Move()
+    virtual protected void Move()
     {
         Vector3 moveDir = new Vector3(nextPos.x - transform.position.x, 0, nextPos.z - transform.position.z).normalized;
-        Vector3 lookPos = new Vector3(nextPos.x, transform.position.y, nextPos.z);
+        //Vector3 lookPos = new Vector3(nextPos.x, transform.position.y, nextPos.z);
         transform.Translate(moveDir * speed * Time.deltaTime, Space.World);
-        transform.LookAt(lookPos);
+        transform.localRotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(moveDir), Time.deltaTime * rotationSpeed);
+        //transform.LookAt(lookPos);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // wayPoints의 부모와 이름이 같은 경우만 충돌
-        if (other.gameObject.transform.parent.name != WayManager.Instance.WalkingWayName[startWayNum])
-            return;
         // layer가 WayPoints인 경우만 충돌
         if (other.gameObject.layer != LayerMask.NameToLayer("WayPoints"))
+            return;
+        // wayPoints의 부모와 이름이 같은 경우만 충돌
+        if (other.gameObject.transform.parent.name != WayManager.Instance.WalkingWayName[startWayNum])
             return;
 
         if (nextIndex >= WayManager.Instance.WalkingWayPoints[startWayNum].Count - 1)
             ArrivedEndPoint();
         else
-        {
             SetNextPoint();
-        }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.cyan;
+        if(target == null)
+            Gizmos.color = Color.cyan;
+        else
+            Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 

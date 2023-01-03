@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8fd267cf287f0244b83ce3dda60cb4b, type: 3}
-  m_Name: Buggy2Data
+  m_Script: {fileID: 11500000, guid: 8dfada7f28de57542958c6c6131dbd84, type: 3}
+  m_Name: PoliceWithPistolData
   m_EditorClassIdentifier: 
-  name: BuggyRed
-  description: Red Buggy
+  name: PoliceWithPistol
+  description: 
   icon: {fileID: 0}
-  prefab: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+  prefab: {fileID: 5123119815658249043, guid: d9f644800a1d3684ab860f7f1e71012d, type: 3}
   bulletPrefab: {fileID: 5664244266537763847, guid: 0cb9c9d3009178b4990359ff7ed0d56d,
     type: 3}
   hp: 5
-  speed: 10
-  attackRange: 20
+  speed: 5
+  attackRange: 15
   attackRoutine: 2
   attackPower: 10
-  bulletSpeed: 40
-  bulletScale: 1
+  bulletSpeed: 30
+  bulletScale: 0.3

@@ -7,7 +7,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum HumanoidEnemyState { Walk, WalkToTarget, Attack }
+public enum HumanoidEnemyState { Walk, WalkToTarget, NearAttack, Attack }
 
 public class HumanoidEnemies : WalkEnemy
 {
@@ -16,6 +16,8 @@ public class HumanoidEnemies : WalkEnemy
     protected Animator animator;
     [SerializeField]
     private Transform topTransform; // 상체 설정
+    [SerializeField]
+    protected float nearAttackTargetDistance;
 
     protected HumanoidEnemyState state;
     private Coroutine searchTargetCoroutine;
@@ -35,11 +37,6 @@ public class HumanoidEnemies : WalkEnemy
         attackSeconds = new WaitForSeconds(attackRoutine);
         searchTargetCoroutine = StartCoroutine(FindTargetDelay());
     }
-    protected override void Update()
-    {
-        base.Update();
-        LookAtTarget();
-    }
 
     private IEnumerator FindTargetDelay()
     {
@@ -48,6 +45,7 @@ public class HumanoidEnemies : WalkEnemy
             yield return searchSeconds;
             // 최적화를 위해 코루틴을 사용해 0.1초마다 탐색하도록 구현
             FindTarget();
+            LookAtTarget();
             StateUpdate();
             //Debug.Log(state);
         }
@@ -137,10 +135,36 @@ public class HumanoidEnemies : WalkEnemy
                 // 타겟이 있으면 attack state로 이동
                 if (target != null)
                 {
-                    state = HumanoidEnemyState.Attack;
+                    Vector3 posDiffWithTarget1 = target.position - this.transform.position;
+                    float sqrdistanceToTarget1 = posDiffWithTarget1.sqrMagnitude;
+                    if (sqrdistanceToTarget1 < nearAttackTargetDistance)
+                        state = HumanoidEnemyState.NearAttack;
+                    else
+                        state = HumanoidEnemyState.Attack;
+
                     isMove = false;
                     Attack();
                     attackCoroutine = StartCoroutine(AttackDelay());
+                    break;
+                }
+                break;
+
+            case HumanoidEnemyState.NearAttack:
+                // 타겟이 없으면 walk state로 이동
+                if (target == null)
+                {
+                    state = HumanoidEnemyState.Walk;
+                    isMove = true;
+                    StopCoroutine(attackCoroutine);
+                    animator.SetTrigger("Walk");
+                    transform.LookAt(nextPos);
+                    break;
+                }
+                Vector3 posDiffWithTarget2 = target.position - this.transform.position;
+                float sqrdistanceToTarget2 = posDiffWithTarget2.sqrMagnitude;
+                if (sqrdistanceToTarget2 >= nearAttackTargetDistance)
+                {
+                    state = HumanoidEnemyState.Attack;
                     break;
                 }
                 break;
@@ -152,8 +176,15 @@ public class HumanoidEnemies : WalkEnemy
                     state = HumanoidEnemyState.Walk;
                     isMove = true;
                     StopCoroutine(attackCoroutine);
-                    animator.SetTrigger("StateChanged");
+                    animator.SetTrigger("Walk");
                     transform.LookAt(nextPos);
+                    break;
+                }
+                Vector3 posDiffWithTarget3 = target.position - this.transform.position;
+                float sqrdistanceToTarget3 = posDiffWithTarget3.sqrMagnitude;
+                if (sqrdistanceToTarget3 < nearAttackTargetDistance)
+                {
+                    state = HumanoidEnemyState.NearAttack;
                     break;
                 }
                 break;

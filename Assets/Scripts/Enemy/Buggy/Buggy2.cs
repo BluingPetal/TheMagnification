@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Buggy2Data))]
 public class Buggy2 : Cars
 {
-    [SerializeField]
-    private Buggy2Data data;
+    public Buggy2Data data;
+    
+    private float bulletSpeed;
 
     private void Awake()
     {
@@ -21,6 +22,10 @@ public class Buggy2 : Cars
         attackRange = data.attackRange;
         attackRoutine = data.attackRoutine;
         attackPower = data.attackPower;
+        bulletSpeed = data.bulletSpeed;
+
+        // shooter setting
+        shooter.owner = this.gameObject;
     }
 
     protected override void Attack()
@@ -29,7 +34,7 @@ public class Buggy2 : Cars
         // 타겟을 바로 공격하면 bullet과 싱크가 맞지 않으므로, bullet script에서 처리
         if (target != null)
         {
-            shooter.Shoot(bulletPrefab, target, attackPower);
+            shooter.Shoot(target);
             animator.SetTrigger("Attack");
         }
     }

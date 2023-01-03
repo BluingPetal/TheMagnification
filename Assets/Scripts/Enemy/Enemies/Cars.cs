@@ -139,6 +139,7 @@ public class Cars : WalkEnemy
                     state = CarState.Attack;
                     isMove = false;
                     Attack();
+                    animator.SetTrigger("WaitCoroutine");
                     attackCoroutine = StartCoroutine(AttackDelay());
                     break;
                 }

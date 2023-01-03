@@ -25,6 +25,8 @@ public class WalkEnemy : MonoBehaviour
     private int startWayNum;        // 경로 종류
     private int nextIndex;          // 향하고 있는 인덱스
     protected Vector3 nextPos;      // 향하고 있는 인덱스의 위치
+    private string curIndexName;    // enter된 오브젝트의 이름이 중복되면 index++되는 것을 방지하기 위함
+    private string prevIndexName;
     [SerializeField]
     private float rotationSpeed;
 
@@ -42,6 +44,8 @@ public class WalkEnemy : MonoBehaviour
         //Debug.Log(string.Format("{0}번째 길을 선택", startWayNum));
         nextIndex = 0;
         nextPos = WayManager.Instance.WalkingWayPoints[startWayNum][nextIndex].position;
+        curIndexName = WayManager.Instance.WalkingWayPoints[startWayNum][nextIndex].name;
+        prevIndexName = "";
         isMove = true;
         target = null;
     }
@@ -63,17 +67,27 @@ public class WalkEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        curIndexName = other.gameObject.name;
+
         // layer가 WayPoints인 경우만 충돌
         if (other.gameObject.layer != LayerMask.NameToLayer("WayPoints"))
             return;
         // wayPoints의 부모와 이름이 같은 경우만 충돌
         if (other.gameObject.transform.parent.name != WayManager.Instance.WalkingWayName[startWayNum])
             return;
+        // 중복해서 enter되었을 경우 방지
+        if (curIndexName == prevIndexName)
+            return;
 
         if (nextIndex >= WayManager.Instance.WalkingWayPoints[startWayNum].Count - 1)
             ArrivedEndPoint();
         else
             SetNextPoint();
+
+        prevIndexName = curIndexName;
+
+        Debug.Log(other.transform.gameObject.name);
+        Debug.Log(nextIndex);
     }
 
     private void OnDrawGizmos()

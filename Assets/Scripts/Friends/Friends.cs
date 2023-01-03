@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Friends : MonoBehaviour, IDamageable
 {
-    public float hp = 30;
+    public float hp = 100;
+    private float moveSpeed = 3;
+
+    private void Update()
+    {
+        //transform.Translate(transform.right * moveSpeed * Time.deltaTime, Space.Self);
+    }
 
     public void TakeDamage(float damage)
     {

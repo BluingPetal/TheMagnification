@@ -8,8 +8,10 @@ public class PoliceWithPole : HumanoidEnemies
 {
     [SerializeField]
     private PoliceWithPoleData data;
-    [SerializeField]
-    private float nearAttackTargetDistance;
+
+    // Properties -> 공격시 사용
+    public Transform Target { get { return target; } }
+    public float AttackPower { get { return attackPower; } }
 
     private void Awake()
     {
@@ -69,7 +71,7 @@ public class PoliceWithPole : HumanoidEnemies
                     state = HumanoidEnemyState.WalkToTarget;
                     animator.SetTrigger("Attackable");
                     break;
-                }                
+                }
                 break;
 
             case HumanoidEnemyState.WalkToTarget:
@@ -124,7 +126,7 @@ public class PoliceWithPole : HumanoidEnemies
             animator.SetTrigger("Attack");
     }
 
-    protected void GiveDamage() // Animation Event에서 호출될 함수
+    public void GiveDamage() // Animation Event에서 호출될 함수
     {
         if (target != null)
         {

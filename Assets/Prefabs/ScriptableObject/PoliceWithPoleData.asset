@@ -15,7 +15,7 @@ MonoBehaviour:
   name: PoliceWithPole
   description: 
   icon: {fileID: 0}
-  prefab: {fileID: 6588497616461063166, guid: 395c6a4a8a6a8be489dfc132035dd7a4, type: 3}
+  prefab: {fileID: 4491081388849208318, guid: 3fbc80649ca82e5408f52316adc9daf9, type: 3}
   hp: 5
   speed: 5
   attackRange: 10

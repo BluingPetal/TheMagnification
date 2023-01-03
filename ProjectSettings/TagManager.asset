@@ -14,9 +14,9 @@ TagManager:
   - WayPoints
   - Enemy
   - Friend
-  - Bullet
-  - 
-  - 
+  - EnemyBullet
+  - MagnifyGlass
+  - FriendBullet
   - 
   - 
   - 

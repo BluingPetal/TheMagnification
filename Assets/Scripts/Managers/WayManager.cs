@@ -14,7 +14,7 @@ public class WayManager : SingleTon<WayManager>
 
     public List<Transform>[] WalkingWayPoints { get; private set; }
     public List<Transform>[] FlyingWayPoints { get; private set; }
-
+    
     private void Awake()
     {
         WalkingWayPoints = new List<Transform>[walkingWay.Length];

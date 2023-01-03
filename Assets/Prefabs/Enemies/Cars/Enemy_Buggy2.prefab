@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e0b03a29413684d8e5a53d48114824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
 --- !u!1 &6054214651408148512
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +727,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &2059022934
 MonoBehaviour:
@@ -740,6 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49170f468c47b54282e03da33075356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 10
   animator: {fileID: 8557838386391729228}
   shooter: {fileID: 1634032137}
   topTransform: {fileID: 8557838386813190033}

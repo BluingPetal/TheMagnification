@@ -38,6 +38,16 @@ public class Shooter : MonoBehaviour
             bulletScale = policeWithPistol.data.bulletScale;
             return;
         }
+        Soldier soldier = owner.GetComponent<Soldier>();
+        if (soldier != null)
+        {
+            Debug.Log("soldier");
+            bulletPrefab = soldier.data.bulletPrefab;
+            bulletSpeed = soldier.data.bulletSpeed;
+            attackPower = soldier.data.attackPower;
+            bulletScale = soldier.data.bulletScale;
+            return;
+        }
     }
 
     public void Shoot(Transform target)

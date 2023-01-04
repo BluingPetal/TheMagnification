@@ -78,7 +78,7 @@ public class Cars : WalkEnemy
             if (Physics.Raycast(transform.position, dirToTarget, out hit, attackRange))
             {
                 // 총알 레이어는 장애물이라고 생각하지 않음
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("EnemyBullet"))
                 { 
                     // Do Nothing
                 }

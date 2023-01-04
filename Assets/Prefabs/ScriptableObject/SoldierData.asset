@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b8abe94a4b5f443afa93deeb1e5f4c, type: 3}
+  m_Name: SoldierData
+  m_EditorClassIdentifier: 
+  name: Soldier
+  description: 
+  icon: {fileID: 0}
+  prefab: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+  bulletPrefab: {fileID: 5664244266537763847, guid: 0cb9c9d3009178b4990359ff7ed0d56d,
+    type: 3}
+  hp: 10
+  speed: 5
+  attackRange: 10
+  attackRoutine: 2
+  attackPower: 10
+  bulletSpeed: 30
+  bulletScale: 0.3

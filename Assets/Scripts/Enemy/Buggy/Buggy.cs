@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Buggy2Data))]
-public class Buggy2 : Cars
+public class Buggy : Cars
 {
-    public Buggy2Data data;
+    public BuggyData data;
     
     private float bulletSpeed;
 

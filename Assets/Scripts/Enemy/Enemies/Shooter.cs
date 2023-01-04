@@ -18,14 +18,14 @@ public class Shooter : MonoBehaviour
     {
         // 부모찾기 TODO : 오브젝트 추가
         // 부모의 data를 받아와 대입
-        Buggy2 buggy2 = owner.GetComponent<Buggy2>();
-        if (buggy2 != null)
+        Buggy buggy = owner.GetComponent<Buggy>();
+        if (buggy != null)
         {
             Debug.Log("buggy2");
-            bulletPrefab = buggy2.data.bulletPrefab;
-            bulletSpeed = buggy2.data.bulletSpeed;
-            attackPower = buggy2.data.attackPower;
-            bulletScale = buggy2.data.bulletScale;
+            bulletPrefab = buggy.data.bulletPrefab;
+            bulletSpeed = buggy.data.bulletSpeed;
+            attackPower = buggy.data.attackPower;
+            bulletScale = buggy.data.bulletScale;
             return;
         }
         PoliceWithPistol policeWithPistol = owner.GetComponent<PoliceWithPistol>();

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemy/Buggy2")]
-public class Buggy2Data : ScriptableObject
+[CreateAssetMenu(menuName = "Enemy/Buggy")]
+public class BuggyData : ScriptableObject
 {
     [Header("Info")]
     public new string name;

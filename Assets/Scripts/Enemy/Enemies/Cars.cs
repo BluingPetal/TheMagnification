@@ -16,8 +16,6 @@ public class Cars : WalkEnemy
     protected Shooter shooter;
     [SerializeField]
     private Transform topTransform;
-    [SerializeField]
-    private Transform bottomTransform;
 
     private CarState state;
     protected GameObject bulletPrefab;
@@ -139,7 +137,6 @@ public class Cars : WalkEnemy
                     state = CarState.Attack;
                     isMove = false;
                     Attack();
-                    animator.SetTrigger("WaitCoroutine");
                     attackCoroutine = StartCoroutine(AttackDelay());
                     break;
                 }

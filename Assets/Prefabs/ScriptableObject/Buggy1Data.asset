@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8fd267cf287f0244b83ce3dda60cb4b, type: 3}
-  m_Name: Buggy2Data
+  m_Name: Buggy1Data
   m_EditorClassIdentifier: 
-  name: Buggy2
+  name: Buggy1
   description: 
   icon: {fileID: 0}
-  prefab: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+  prefab: {fileID: 0}
   bulletPrefab: {fileID: 5664244266537763847, guid: 0cb9c9d3009178b4990359ff7ed0d56d,
     type: 3}
   hp: 20
   speed: 10
-  attackRange: 10
-  attackRoutine: 3
-  attackPower: 10
+  attackRange: 20
+  attackRoutine: 2
+  attackPower: 5
   bulletSpeed: 30
   bulletScale: 1

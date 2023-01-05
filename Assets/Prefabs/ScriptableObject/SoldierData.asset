@@ -25,3 +25,4 @@ MonoBehaviour:
   attackPower: 10
   bulletSpeed: 30
   bulletScale: 0.3
+  bulletParticle: {fileID: 19800004, guid: 234e5aa95353f0643b0181dc3872cda9, type: 3}

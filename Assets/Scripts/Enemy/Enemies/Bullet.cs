@@ -17,6 +17,8 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed;
     [HideInInspector]
     public float bulletScale;
+    [HideInInspector]
+    public ParticleSystem explodeParticle = null;
 
     private CapsuleCollider colldier;
     private bool isAlreadyDamaged;
@@ -69,6 +71,9 @@ public class Bullet : MonoBehaviour
                 damageableTarget?.TakeDamage(attackPower);
                 isAlreadyDamaged = true;
 
+                // explode 효과
+                if (explodeParticle != null)
+                    Instantiate(explodeParticle, transform.position, Quaternion.LookRotation(hit.normal));
                 // 총알(자신) 반응
                 Destroy(gameObject);
             }
@@ -86,7 +91,10 @@ public class Bullet : MonoBehaviour
             IDamageable damageableTarget = other.gameObject.GetComponent<IDamageable>();
             damageableTarget?.TakeDamage(attackPower);
         }
-    
+
+        // explode 효과
+        if (explodeParticle != null)
+            Instantiate(explodeParticle, transform.position, transform.rotation);
         // 총알(자신) 반응
         Destroy(gameObject);
     }

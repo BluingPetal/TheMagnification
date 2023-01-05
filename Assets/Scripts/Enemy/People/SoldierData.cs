@@ -22,5 +22,8 @@ public class SoldierData : ScriptableObject
     [Header("BulletSetting")]
     public float bulletSpeed;
     public float bulletScale;
+
+    [Header("FX")]
+    public ParticleSystem bulletParticle;
     // 어느 스테이지에 나올지도 정하기
 }

@@ -31,3 +31,9 @@ MonoBehaviour:
   missileSpeed: 30
   missileScale: 1
   missilePower: 50
+  bulletParticle: {fileID: 19800014, guid: a57a6829db3568c4d9bdc37e9e63c017, type: 3}
+  missileParticle: {fileID: 19800008, guid: 8f611da60097c85438a2947021f045cf, type: 3}
+  bulletExplodeParticle: {fileID: 19800002, guid: e74af37e539075d428c1f7bd8cdb781d,
+    type: 3}
+  missileExplodeParticle: {fileID: 19800006, guid: 42f257b24c959a44794a35d032e9da12,
+    type: 3}

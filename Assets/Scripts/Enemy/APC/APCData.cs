@@ -27,5 +27,11 @@ public class APCData : ScriptableObject
     public float missileSpeed;
     public float missileScale;
     public float missilePower;
+
+    [Header("FX")]
+    public ParticleSystem bulletParticle;
+    public ParticleSystem missileParticle;
+    public ParticleSystem bulletExplodeParticle;
+    public ParticleSystem missileExplodeParticle;
     // 어느 스테이지에 나올지도 정하기
 }

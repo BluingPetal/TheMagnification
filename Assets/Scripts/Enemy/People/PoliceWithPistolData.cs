@@ -22,4 +22,7 @@ public class PoliceWithPistolData : ScriptableObject
     [Header("BulletSetting")]
     public float bulletSpeed;
     public float bulletScale;
+
+    [Header("FX")]
+    public ParticleSystem bulletParticle;
 }

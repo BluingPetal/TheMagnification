@@ -114,8 +114,9 @@ public class HumanoidEnemies : WalkEnemy
             transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
 
             // 자신의 y위치보다 target의 y위치가 더 높을 경우 상체만 위를 바라보도록 구현
-            if (target.position.y > transform.position.y)
-                topTransform.LookAt(target);
+            // TODO : 공중 오브젝트 있을 때 주석 풀기 ( 다른 곳에서 쏠때의 파티클 시스템이 작동함 )
+            //if (target.position.y > transform.position.y)
+            //    topTransform.LookAt(target);
 
             // 타겟을 향한 ray 그리기
             Vector3 posDiffWithTarget = target.gameObject.transform.position - this.transform.position;
@@ -129,6 +130,7 @@ public class HumanoidEnemies : WalkEnemy
 
     virtual protected void StateUpdate()
     {
+        Debug.Log(state);
         switch (state)
         {
             case HumanoidEnemyState.Walk:

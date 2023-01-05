@@ -15,7 +15,7 @@ MonoBehaviour:
   name: APC1
   description: 
   icon: {fileID: 0}
-  prefab: {fileID: 4668697243393919122, guid: aa95409e7b8cf364a948042270524d0d, type: 3}
+  prefab: {fileID: 3922601976980333509, guid: 367eb2237829138419f0b80b0480fbb2, type: 3}
   bulletPrefab: {fileID: 5664244266537763847, guid: 0cb9c9d3009178b4990359ff7ed0d56d,
     type: 3}
   missilePrefab: {fileID: 5664244266537763847, guid: 4eb07129c05c4b842b3190e931e993df,
@@ -31,3 +31,9 @@ MonoBehaviour:
   missileSpeed: 30
   missileScale: 1
   missilePower: 50
+  bulletParticle: {fileID: 19800014, guid: a57a6829db3568c4d9bdc37e9e63c017, type: 3}
+  missileParticle: {fileID: 19800008, guid: 8f611da60097c85438a2947021f045cf, type: 3}
+  bulletExplodeParticle: {fileID: 19800002, guid: e74af37e539075d428c1f7bd8cdb781d,
+    type: 3}
+  missileExplodeParticle: {fileID: 19800006, guid: 42f257b24c959a44794a35d032e9da12,
+    type: 3}

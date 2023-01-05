@@ -16,6 +16,8 @@ public class Shooter : MonoBehaviour
     private float bulletSpeed;
     private float attackPower;
     private float bulletScale;
+    private ParticleSystem bulletParticle;
+    private ParticleSystem explodeParticle = null;
 
     private void Start()
     {
@@ -41,6 +43,8 @@ public class Shooter : MonoBehaviour
                 bulletSpeed = apc.data.missileSpeed;
                 attackPower = apc.data.missilePower;
                 bulletScale = apc.data.missileScale;
+                bulletParticle = apc.data.missileParticle;
+                explodeParticle = apc.data.missileExplodeParticle;
             }
             else
             {
@@ -49,6 +53,8 @@ public class Shooter : MonoBehaviour
                 bulletSpeed = apc.data.bulletSpeed;
                 attackPower = apc.data.bulletPower;
                 bulletScale = apc.data.bulletScale;
+                bulletParticle = apc.data.bulletParticle;
+                explodeParticle = apc.data.bulletExplodeParticle;
             }
             return;
         }
@@ -62,6 +68,8 @@ public class Shooter : MonoBehaviour
                 bulletSpeed = multiAPC.data.missileSpeed;
                 attackPower = multiAPC.data.missilePower;
                 bulletScale = multiAPC.data.missileScale;
+                bulletParticle = multiAPC.data.missileParticle;
+                explodeParticle = apc.data.missileExplodeParticle;
             }
             else
             {
@@ -70,6 +78,8 @@ public class Shooter : MonoBehaviour
                 bulletSpeed = multiAPC.data.bulletSpeed;
                 attackPower = multiAPC.data.bulletPower;
                 bulletScale = multiAPC.data.bulletScale;
+                bulletParticle = multiAPC.data.bulletParticle;
+                explodeParticle = apc.data.bulletExplodeParticle;
             }
             return;
         }
@@ -81,6 +91,7 @@ public class Shooter : MonoBehaviour
             bulletSpeed = policeWithPistol.data.bulletSpeed;
             attackPower = policeWithPistol.data.attackPower;
             bulletScale = policeWithPistol.data.bulletScale;
+            bulletParticle = policeWithPistol.data.bulletParticle;
             return;
         }
         Soldier soldier = owner.GetComponent<Soldier>();
@@ -91,17 +102,21 @@ public class Shooter : MonoBehaviour
             bulletSpeed = soldier.data.bulletSpeed;
             attackPower = soldier.data.attackPower;
             bulletScale = soldier.data.bulletScale;
+            bulletParticle = soldier.data.bulletParticle;
             return;
         }
     }
 
     public void Shoot(Transform target)
     {
-            GameObject obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            Bullet bullet = obj.GetComponent<Bullet>();
-            bullet.target = target;
-            bullet.attackPower = attackPower;
-            bullet.bulletSpeed = bulletSpeed;
-            bullet.bulletScale = bulletScale;
+        Instantiate(bulletParticle, transform.position, transform.rotation);
+        GameObject obj = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        Bullet bullet = obj.GetComponent<Bullet>();
+        bullet.target = target;
+        bullet.attackPower = attackPower;
+        bullet.bulletSpeed = bulletSpeed;
+        bullet.bulletScale = bulletScale;
+        if(explodeParticle != null)
+            bullet.explodeParticle = explodeParticle;
     }
 }

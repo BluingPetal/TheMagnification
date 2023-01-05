@@ -5,8 +5,6 @@ using UnityEngine;
 public class Buggy : Cars
 {
     public BuggyData data;
-    
-    private float bulletSpeed;
 
     private void Awake()
     {
@@ -21,7 +19,6 @@ public class Buggy : Cars
         attackRange = data.attackRange;
         attackRoutine = data.attackRoutine;
         attackPower = data.attackPower;
-        bulletSpeed = data.bulletSpeed;
 
         // shooter setting
         shooter.owner = this.gameObject;

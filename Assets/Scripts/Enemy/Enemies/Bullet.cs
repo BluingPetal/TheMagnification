@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
     public float bulletScale;
 
     private CapsuleCollider colldier;
+    private bool isAlreadyDamaged;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class Bullet : MonoBehaviour
     {
         this.gameObject.transform.localScale = this.gameObject.transform.lossyScale * bulletScale;
         Destroy(gameObject, lifeTime);
+        isAlreadyDamaged = false;
     }
 
     private void FixedUpdate()
@@ -56,14 +58,16 @@ public class Bullet : MonoBehaviour
     private void DetectObject()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, colldier.radius, transform.forward, out hit, colldier.height * transform.localScale.x))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, colldier.height * transform.localScale.x))
         {
             // ray에 맞은 IDamageable Gameobject(target) 반응
             // Friend layer일 경우에만 IDamageable 처리
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Friend"))
             {
+                Debug.Log("raycast dead");
                 IDamageable damageableTarget = hit.transform.gameObject.GetComponent<IDamageable>();
                 damageableTarget?.TakeDamage(attackPower);
+                isAlreadyDamaged = true;
             }
 
             // 총알(자신) 반응
@@ -74,12 +78,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Friend"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Friend") && !isAlreadyDamaged)
         {
+            Debug.Log("trigger enter dead");
             IDamageable damageableTarget = other.gameObject.GetComponent<IDamageable>();
             damageableTarget?.TakeDamage(attackPower);
         }
-
+    
         // 총알(자신) 반응
         Destroy(gameObject);
     }

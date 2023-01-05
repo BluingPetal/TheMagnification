@@ -90,7 +90,7 @@ public class WalkEnemy : MonoBehaviour
         Debug.Log(nextIndex);
     }
 
-    private void OnDrawGizmos()
+    virtual protected void OnDrawGizmos()
     {
         if(target == null)
             Gizmos.color = Color.cyan;

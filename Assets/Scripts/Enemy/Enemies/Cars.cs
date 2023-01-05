@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum CarState { Normal, Attack }
+public enum CarState { Normal, ChangeWeapon ,Attack }
 
 public class Cars : WalkEnemy
 {
@@ -15,15 +15,15 @@ public class Cars : WalkEnemy
     [SerializeField]
     protected Shooter shooter;
     [SerializeField]
-    private Transform topTransform;
+    protected Transform topTransform;
 
-    private CarState state;
+    protected CarState state;
     protected GameObject bulletPrefab;
 
-    private Coroutine searchTargetCoroutine;
-    private Coroutine attackCoroutine;
-    WaitForSeconds searchSeconds;
-    WaitForSeconds attackSeconds;
+    protected Coroutine searchTargetCoroutine;
+    protected Coroutine attackCoroutine;
+    protected WaitForSeconds searchSeconds;
+    private WaitForSeconds attackSeconds;
 
     private float updateIntervalTime;
     private float minSqrDistance;
@@ -109,7 +109,7 @@ public class Cars : WalkEnemy
             }
         }
     }
-    protected void LookAtTarget()
+    virtual protected void LookAtTarget()
     {
         if (target != null)
         {
@@ -126,7 +126,7 @@ public class Cars : WalkEnemy
         }
     }
     
-    private void StateUpdate()
+    virtual protected void StateUpdate()
     {
         switch (state)
         {
@@ -157,7 +157,7 @@ public class Cars : WalkEnemy
         }
     }
 
-    private IEnumerator AttackDelay()
+    protected IEnumerator AttackDelay()
     {
         while (true)
         {

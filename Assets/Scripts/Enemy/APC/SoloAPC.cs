@@ -64,13 +64,6 @@ public class SoloAPC : Cars
 
     protected override void StateUpdate()
     {
-        if (target != null)
-        {
-            Vector3 posDiffWithTarget1 = target.position - this.transform.position;
-            float sqrdistanceToTarget1 = posDiffWithTarget1.sqrMagnitude;
-            Debug.Log(sqrdistanceToTarget1);
-        }
-
         switch (state)
         {
             case CarState.Normal:
@@ -84,13 +77,14 @@ public class SoloAPC : Cars
                         if (curWeapon == Weapon.Bullet)
                         {
                             state = CarState.Attack;
-                            //animator.SetInteger("CurWeapon", (int)curWeapon);
+                            animator.SetBool("Normal", false);
                             Attack();
                             attackCoroutine = StartCoroutine(AttackDelay());
                         }
                         else
                         {
                             state = CarState.ChangeWeapon;
+                            animator.SetBool("Normal", false);
                             changedWeapon = false;
                             animator.SetBool("ChangedWeapon", changedWeapon);
                         }
@@ -102,13 +96,14 @@ public class SoloAPC : Cars
                         if (curWeapon == Weapon.Missile)
                         {
                             state = CarState.Attack;
-                            //animator.SetInteger("CurWeapon", (int)curWeapon);
+                            animator.SetBool("Normal", false);
                             Attack();
                             attackCoroutine = StartCoroutine(AttackDelay());
                         }
                         else
                         {
                             state = CarState.ChangeWeapon;
+                            animator.SetBool("Normal", false);
                             changedWeapon = false;
                             animator.SetBool("ChangedWeapon", changedWeapon);
                         }
@@ -147,8 +142,9 @@ public class SoloAPC : Cars
                 {
                     state = CarState.Normal;
                     isMove = true;
+                    changedWeapon = true;
                     StopCoroutine(attackCoroutine);
-                    animator.SetTrigger("Normal");
+                    animator.SetBool("Normal", true);
                     break;
                 }
                 Vector3 posDiffWithTarget2 = target.position - this.transform.position;
@@ -185,7 +181,7 @@ public class SoloAPC : Cars
         {
             state = CarState.Normal;
             isMove = true;
-            animator.SetTrigger("Normal");
+            animator.SetBool("Normal", true);
             return;
         }
         state = CarState.Attack;

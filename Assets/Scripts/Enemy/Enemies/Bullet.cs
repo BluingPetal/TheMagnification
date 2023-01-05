@@ -68,16 +68,18 @@ public class Bullet : MonoBehaviour
                 IDamageable damageableTarget = hit.transform.gameObject.GetComponent<IDamageable>();
                 damageableTarget?.TakeDamage(attackPower);
                 isAlreadyDamaged = true;
-            }
 
-            // 총알(자신) 반응
-            Destroy(gameObject);
+                // 총알(자신) 반응
+                Destroy(gameObject);
+            }
         }
         Debug.DrawRay(transform.position, transform.forward * (colldier.height * transform.localScale.x), Color.magenta);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // target이 ray에 감지되지 않을 경우를 방지해 trigger에서도 판정
+        // ray와 중복 적용되지 않도록 isAlreadyDamaged (bool)변수 추가
         if (other.gameObject.layer == LayerMask.NameToLayer("Friend") && !isAlreadyDamaged)
         {
             Debug.Log("trigger enter dead");

@@ -114,7 +114,7 @@ public class Cars : WalkEnemy
         if (target != null)
         {
             // target을 바라보도록 구현
-            topTransform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+            topTransform.LookAt(new Vector3(target.position.x, topTransform.position.y, target.position.z));
 
             // 자신의 y위치보다 target의 y위치가 더 높을 경우 상체만 위를 바라보도록 구현
             if (target.position.y > transform.position.y)

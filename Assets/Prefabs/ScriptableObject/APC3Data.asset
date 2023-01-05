@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c437ca6abe6d0b746af682fdd64c294e, type: 3}
+  m_Name: APC3Data
+  m_EditorClassIdentifier: 
+  name: APC3
+  description: 
+  icon: {fileID: 0}
+  prefab: {fileID: 6617507906417772439, guid: 807a03c3ed98e444e85e11d135c8a082, type: 3}
+  bulletPrefab: {fileID: 5664244266537763847, guid: 0cb9c9d3009178b4990359ff7ed0d56d,
+    type: 3}
+  missilePrefab: {fileID: 5664244266537763847, guid: 4eb07129c05c4b842b3190e931e993df,
+    type: 3}
+  hp: 50
+  speed: 10
+  attackRange: 20
+  attackRoutine: 2.5
+  nearAttackTargetDistance: 90
+  bulletSpeed: 30
+  bulletScale: 1
+  bulletPower: 5
+  missileSpeed: 40
+  missileScale: 1
+  missilePower: 50

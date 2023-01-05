@@ -52,6 +52,27 @@ public class Shooter : MonoBehaviour
             }
             return;
         }
+        if (owner.TryGetComponent(out MultiAPC multiAPC))
+        {
+            Debug.Log(string.Format("{0} : multiAPC", owner.name));
+            if (kind == "Missile")
+            {
+                Debug.Log("missile");
+                bulletPrefab = multiAPC.data.missilePrefab;
+                bulletSpeed = multiAPC.data.missileSpeed;
+                attackPower = multiAPC.data.missilePower;
+                bulletScale = multiAPC.data.missileScale;
+            }
+            else
+            {
+                Debug.Log("bullet");
+                bulletPrefab = multiAPC.data.bulletPrefab;
+                bulletSpeed = multiAPC.data.bulletSpeed;
+                attackPower = multiAPC.data.bulletPower;
+                bulletScale = multiAPC.data.bulletScale;
+            }
+            return;
+        }
         PoliceWithPistol policeWithPistol = owner.GetComponent<PoliceWithPistol>();
         if (policeWithPistol != null)
         {

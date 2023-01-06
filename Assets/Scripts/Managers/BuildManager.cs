@@ -10,11 +10,15 @@ public class BuildManager : SingleTon<BuildManager>
     private List<ScriptableObject> PlaceableDatas;
     [SerializeField]
     private Material ghostMaterial;
+    [SerializeField]
+    private Material banMaterial;
     [HideInInspector]
     public Place selectedPlace;
+    [SerializeField]
+    private LayerMask groundMask;
 
-    public GameObject selectedPlaceableObj;
-    public GameObject instantiatedPrefab;
+    private GameObject selectedPlaceableObj;
+    private GameObject instantiatedPrefab;
     private Coroutine prefabMouseFollowCoroutine;
 
     private void Start()
@@ -40,18 +44,8 @@ public class BuildManager : SingleTon<BuildManager>
         }
 
         instantiatedPrefab = Instantiate(selectedPlaceableObj, CalculateHitPos(), Quaternion.identity);
-        for (int i = 0; i < instantiatedPrefab.transform.childCount; i++)
-        {
-            if (instantiatedPrefab.transform.GetChild(i).gameObject.activeSelf)
-            {
-                for(int j=0; j< instantiatedPrefab.transform.GetChild(i).childCount; j++)
-                {
-                    instantiatedPrefab.transform.GetChild(i).GetChild(j).GetComponent<Renderer>().material = ghostMaterial;
-                }
-                break;
-            }
-        }
-
+        ChangeMat(ghostMaterial);
+        instantiatedPrefab.GetComponent<Collider>().enabled = false;
         prefabMouseFollowCoroutine = StartCoroutine(prefabMouseFollow());
     }
 
@@ -62,10 +56,17 @@ public class BuildManager : SingleTon<BuildManager>
             yield return null;
             if (Input.GetMouseButton(0))
             {
-                if(selectedPlace != null)
+                if (selectedPlace != null && selectedPlace.isOccupied)
+                {
+                    ChangeMat(banMaterial);
+                }
+                else if (selectedPlace != null)
                     instantiatedPrefab.transform.position = selectedPlace.transform.position;
                 else
+                {
                     instantiatedPrefab.transform.position = CalculateHitPos();
+                    ChangeMat(ghostMaterial);
+                }
             }
             else if (Input.GetMouseButtonUp(0))
             {
@@ -77,13 +78,14 @@ public class BuildManager : SingleTon<BuildManager>
 
     private Vector3 CalculateHitPos()
     {
-        Vector2 pos = Input.mousePosition;
-        Vector3 screenPos = new Vector3(pos.x, pos.y, 10);
-        Vector3 dir = (Camera.main.ScreenToWorldPoint(screenPos) - Camera.main.transform.position).normalized;
+        //Vector2 pos = Input.mousePosition;
+        //Vector3 screenPos = new Vector3(pos.x, pos.y, 10);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Vector3 dir = (Camera.main.ScreenToWorldPoint(screenPos) - Camera.main.transform.position).normalized;
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, dir, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
         {
-            //Debug.Log(hit.transform.name);
+            Debug.Log(hit.point);
             return hit.point;
         }
         else
@@ -111,8 +113,23 @@ public class BuildManager : SingleTon<BuildManager>
             Build();
         }
 
-        // 설치 취소
+        // 취소
         Destroy(instantiatedPrefab);
         instantiatedPrefab = null;
+    }
+
+    private void ChangeMat(Material material)
+    {
+        for (int i = 0; i < instantiatedPrefab.transform.childCount; i++)
+        {
+            if (instantiatedPrefab.transform.GetChild(i).gameObject.activeSelf)
+            {
+                for (int j = 0; j < instantiatedPrefab.transform.GetChild(i).childCount; j++)
+                {
+                    instantiatedPrefab.transform.GetChild(i).GetChild(j).GetComponent<Renderer>().material = material;
+                }
+                break;
+            }
+        }
     }
 }

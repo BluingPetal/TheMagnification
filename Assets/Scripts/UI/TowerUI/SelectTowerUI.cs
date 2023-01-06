@@ -13,11 +13,6 @@ public class SelectTowerUI : MonoBehaviour, IPointerDownHandler
         SelectTower();
     }
 
-    //public void OnPointerUp(PointerEventData eventData)
-    //{
-    //    BuildManager.Instance.DoneSelected();
-    //}
-
     private void SelectTower()
     {
         Transform childImg = transform.GetChild(0);

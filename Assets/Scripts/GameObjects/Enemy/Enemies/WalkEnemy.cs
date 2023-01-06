@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class WalkEnemy : MonoBehaviour
+public class WalkEnemy : MonoBehaviour, IDamageable
 {
     // scriptableObject에 공통적으로 있는 정보들
     protected new string name;
@@ -14,7 +15,9 @@ public class WalkEnemy : MonoBehaviour
     protected Sprite icon;
     protected GameObject prefab;
 
+    protected float maxHp;
     protected float hp;
+    protected float maxSpeed;
     protected float speed;
     protected float attackRange;
     protected float attackRoutine;
@@ -33,8 +36,13 @@ public class WalkEnemy : MonoBehaviour
     protected Transform target;
     protected bool isMove;
 
+    public UnityEvent<float, float> OnHpChanged;
+
     // Properties
-    public Vector3 CurPos { get { return this.transform.position; } }
+    // public Vector3 CurPos { get { return this.transform.position; } }
+
+
+    public float HP { get { return hp; } protected set { hp = value; OnHpChanged?.Invoke(maxHp, hp); } }
 
     virtual protected void Start()
     {
@@ -110,7 +118,7 @@ public class WalkEnemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    virtual protected void Attack()
-    {
-    }
+    virtual protected void Attack() { }
+
+    virtual public void TakeDamage(float damage) { }
 }   

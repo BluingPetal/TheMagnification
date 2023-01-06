@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemy/Buggy")]
-public class BuggyData : ScriptableObject
+[CreateAssetMenu(menuName = "Friends/MachineGun")]
+public class MachineGunData : ScriptableObject
 {
     [Header("Info")]
     public new string name;
@@ -11,6 +12,7 @@ public class BuggyData : ScriptableObject
     public Sprite icon;
     public GameObject prefab;
     public GameObject bulletPrefab;
+    public int cost;
 
     [Header("Stats")]
     public float hp;
@@ -18,10 +20,11 @@ public class BuggyData : ScriptableObject
     public float attackRange;
     public float attackRoutine;
     public float attackPower;
+
+    [Header("BulletSetting")]
     public float bulletSpeed;
     public float bulletScale;
 
     [Header("FX")]
     public ParticleSystem bulletParticle;
-    // 어느 스테이지에 나올지도 정하기
 }

@@ -1,4 +1,3 @@
-using Core.Data;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -31,6 +30,7 @@ public class Shooter : MonoBehaviour
             bulletSpeed = buggy.data.bulletSpeed;
             attackPower = buggy.data.attackPower;
             bulletScale = buggy.data.bulletScale;
+            bulletParticle = buggy.data.bulletParticle;
             return;
         }
         if (owner.TryGetComponent(out SoloAPC apc))
@@ -69,7 +69,7 @@ public class Shooter : MonoBehaviour
                 attackPower = multiAPC.data.missilePower;
                 bulletScale = multiAPC.data.missileScale;
                 bulletParticle = multiAPC.data.missileParticle;
-                explodeParticle = apc.data.missileExplodeParticle;
+                explodeParticle = multiAPC.data.missileExplodeParticle;
             }
             else
             {
@@ -79,7 +79,7 @@ public class Shooter : MonoBehaviour
                 attackPower = multiAPC.data.bulletPower;
                 bulletScale = multiAPC.data.bulletScale;
                 bulletParticle = multiAPC.data.bulletParticle;
-                explodeParticle = apc.data.bulletExplodeParticle;
+                explodeParticle = multiAPC.data.bulletExplodeParticle;
             }
             return;
         }

@@ -38,9 +38,4 @@ public class Place : MonoBehaviour
         BuildManager.Instance.selectedPlace = null;
         rend.material = mouseExitMat;
     }
-
-    //private void OnMouseUpAsButton() // 나중에 지우기
-    //{
-    //    BuildManager.Instance.Build();
-    //}
 }

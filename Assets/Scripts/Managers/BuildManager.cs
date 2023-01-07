@@ -23,6 +23,8 @@ public class BuildManager : SingleTon<BuildManager>
 
     private void Start()
     {
+        selectedPlace = null;
+        selectedPlaceableObj = null;
         instantiatedPrefab = null;
     }
 
@@ -85,7 +87,6 @@ public class BuildManager : SingleTon<BuildManager>
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
         {
-            Debug.Log(hit.point);
             return hit.point;
         }
         else
@@ -101,8 +102,9 @@ public class BuildManager : SingleTon<BuildManager>
         if (selectedPlace.isOccupied)
             return;
 
-        Instantiate(selectedPlaceableObj, selectedPlace.transform.position, selectedPlace.transform.rotation);
+        GameObject installedObj = Instantiate(selectedPlaceableObj, selectedPlace.transform.position, selectedPlace.transform.rotation);
         selectedPlace.isOccupied = true;
+        installedObj.GetComponent<PlaceableObject>().isInstalled = true;
     }
 
     public void DoneSelected()
@@ -113,7 +115,7 @@ public class BuildManager : SingleTon<BuildManager>
             Build();
         }
 
-        // 취소
+        // 프리팹 삭제
         Destroy(instantiatedPrefab);
         instantiatedPrefab = null;
     }

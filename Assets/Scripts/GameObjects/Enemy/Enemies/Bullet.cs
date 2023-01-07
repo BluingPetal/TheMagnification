@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float lifeTime;
     [HideInInspector]
+    public LayerMask ownerLayer;
+    [HideInInspector]
     public float attackPower;
     [HideInInspector]
     public Transform target;
@@ -63,19 +65,21 @@ public class Bullet : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, colldier.height * transform.localScale.x))
         {
             // ray에 맞은 IDamageable Gameobject(target) 반응
-            // Friend layer일 경우에만 IDamageable 처리
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Friend"))
+            // layer에 따라 반응이 다르게 처리
+            if ((ownerLayer == LayerMask.NameToLayer("Enemy") && hit.collider.gameObject.layer == LayerMask.NameToLayer("Friend"))
+                || (ownerLayer == LayerMask.NameToLayer("Friend") && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")))
             {
                 Debug.Log("raycast dead");
                 IDamageable damageableTarget = hit.transform.gameObject.GetComponent<IDamageable>();
                 damageableTarget?.TakeDamage(attackPower);
-                isAlreadyDamaged = true;
 
                 // explode 효과
                 if (explodeParticle != null)
                     Instantiate(explodeParticle, transform.position, Quaternion.LookRotation(hit.normal));
                 // 총알(자신) 반응
                 Destroy(gameObject);
+
+                isAlreadyDamaged = true;
             }
         }
         Debug.DrawRay(transform.position, transform.forward * (colldier.height * transform.localScale.x), Color.magenta);
@@ -84,8 +88,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // target이 ray에 감지되지 않을 경우를 방지해 trigger에서도 판정
-        // ray와 중복 적용되지 않도록 isAlreadyDamaged (bool)변수 추가
-        if (other.gameObject.layer == LayerMask.NameToLayer("Friend") && !isAlreadyDamaged)
+        // ray와 중복 적용되지 않도록 isAlreadyDamaged (bool)변수 추가 // layer에 따라 반응이 다르게 처리
+        if (((ownerLayer == LayerMask.NameToLayer("Enemy") && other.gameObject.layer == LayerMask.NameToLayer("Friend"))
+            || (ownerLayer == LayerMask.NameToLayer("Friend") && other.gameObject.layer == LayerMask.NameToLayer("Enemy")))
+            && !isAlreadyDamaged)
         {
             Debug.Log("trigger enter dead");
             IDamageable damageableTarget = other.gameObject.GetComponent<IDamageable>();

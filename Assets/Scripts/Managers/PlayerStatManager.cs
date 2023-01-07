@@ -31,4 +31,14 @@ public class PlayerStatManager : SingleTon<PlayerStatManager>
         Money = 1000;
         Life = 300;
     }
+
+    public void EarnMoney(int money)
+    {
+        Money += money;
+    }
+
+    public void UseMoney(int money)
+    {
+        Money -= money;
+    }
 }

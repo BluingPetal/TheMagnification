@@ -97,7 +97,7 @@ public class WalkEnemy : MonoBehaviour, IDamageable
         Debug.Log(nextIndex);
     }
 
-    virtual protected void OnDrawGizmos()
+    virtual protected void OnDrawGizmosSelected()
     {
         if(target == null)
             Gizmos.color = Color.cyan;

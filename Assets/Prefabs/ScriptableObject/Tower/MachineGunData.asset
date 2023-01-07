@@ -16,13 +16,23 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: 3631244dc04164d079a3302a39dbc0c6, type: 3}
   prefab: {fileID: 489113303678961223, guid: 1ded9969317a5b5429332e860f182f63, type: 3}
-  bulletPrefab: {fileID: 0}
-  cost: 50
-  hp: 0
-  speed: 0
-  attackRange: 0
-  attackRoutine: 0
-  attackPower: 0
-  bulletSpeed: 0
-  bulletScale: 0
-  bulletParticle: {fileID: 0}
+  bulletPrefab: {fileID: 5664244266537763847, guid: 188a032b655feb7408fd9357d1c4af0d,
+    type: 3}
+  level1_hp: 10
+  level1_attackRange: 8
+  level1_attackRoutine: 7
+  level1_attackPower: 5
+  level1_cost: 100
+  level2_hp: 20
+  level2_attackRange: 16
+  level2_attackRoutine: 5
+  level2_attackPower: 10
+  level2_cost: 200
+  level3_hp: 30
+  level3_attackRange: 24
+  level3_attackRoutine: 3
+  level3_attackPower: 20
+  level3_cost: 300
+  bulletSpeed: 30
+  bulletScale: 1
+  bulletParticle: {fileID: 19800000, guid: cdf14baff693fbc439f8c859529a63a6, type: 3}

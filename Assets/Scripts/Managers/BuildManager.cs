@@ -43,6 +43,15 @@ public class BuildManager : SingleTon<BuildManager>
                     break;
                 }
             }
+            else if (PlaceableDatas[i] is RocketData)
+            {
+                RocketData data = PlaceableDatas[i] as RocketData;
+                if (data.icon == uiSprite)
+                {
+                    selectedPlaceableObj = data.prefab;
+                    break;
+                }
+            }
         }
 
         instantiatedPrefab = Instantiate(selectedPlaceableObj, CalculateHitPos(), Quaternion.identity);

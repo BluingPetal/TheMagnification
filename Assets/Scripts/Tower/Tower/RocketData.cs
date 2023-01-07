@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Friends/MachineGun")]
-public class MachineGunData : ScriptableObject
+[CreateAssetMenu(menuName = "Friends/Rocket")]
+public class RocketData : ScriptableObject
 {
     [Header("Info")]
     public new string name;
     public string description;
     public Sprite icon;
     public GameObject prefab;
-    public GameObject bulletPrefab;
+    public GameObject rocketPrefab;
 
     [Header("Stats_Level1")]
     public float level1_hp;
@@ -36,9 +35,10 @@ public class MachineGunData : ScriptableObject
     public int level3_continuousShot;
 
     [Header("BulletSetting")]
-    public float bulletSpeed;
-    public float bulletScale;
+    public float rocketSpeed;
+    public float rocketScale;
 
     [Header("FX")]
-    public ParticleSystem bulletParticle;
+    public ParticleSystem rocketShootParticle;
+    public ParticleSystem rocketExplosion;
 }

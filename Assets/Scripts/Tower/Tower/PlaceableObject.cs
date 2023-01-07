@@ -10,6 +10,7 @@ public class PlaceableObject : MonoBehaviour, IDamageable
     protected float curHp;
     protected float attackRange;
     protected float attackRoutine;
+    [HideInInspector]
     public float attackPower;
     protected int cost;
 
@@ -17,13 +18,6 @@ public class PlaceableObject : MonoBehaviour, IDamageable
     private bool isAttack = false;
 
     protected Transform topTransform;
-    [SerializeField]
-    protected Transform level1_topTransform;
-    [SerializeField]
-    protected Transform level2_topTransform;
-    [SerializeField]
-    protected Transform level3_topTransform;
-
 
     private Coroutine searchTargetCoroutine;
     protected Coroutine attackCoroutine;

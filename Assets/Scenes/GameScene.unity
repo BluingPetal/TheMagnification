@@ -9867,8 +9867,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 201.10591, y: 2.2897077, z: 264.9058}
-  m_Center: {x: 80.17214, y: -0.87273955, z: 111.95308}
+  m_Size: {x: 201.10591, y: 1, z: 264.9058}
+  m_Center: {x: 80.17214, y: -0.5, z: 111.95308}
 --- !u!1 &934827441
 GameObject:
   m_ObjectHideFlags: 0
@@ -18085,6 +18085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlaceableDatas:
   - {fileID: 11400000, guid: 7af146aa8602ff74bbc6ce25a63905b6, type: 2}
+  - {fileID: 11400000, guid: 071547505a3d36d4892fc5108788a4a2, type: 2}
   ghostMaterial: {fileID: 2100000, guid: 6fe9580bd67b34580977e0aa4eab9755, type: 2}
   banMaterial: {fileID: 2100000, guid: a33edf12f3c0044e8ba582a16ddaae3f, type: 2}
   selectedPlace: {fileID: 0}
@@ -22684,19 +22685,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 213041798, guid: 1ded9969317a5b5429332e860f182f63, type: 3}
-      propertyPath: isInstalled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 489113303678961223, guid: 1ded9969317a5b5429332e860f182f63,
         type: 3}
       propertyPath: m_Name
       value: MachineGun
-      objectReference: {fileID: 0}
-    - target: {fileID: 489113303678961223, guid: 1ded9969317a5b5429332e860f182f63,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 489113303678961240, guid: 1ded9969317a5b5429332e860f182f63,
         type: 3}
@@ -22774,21 +22766,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2981391337206131127, guid: 965400e3fce33cf4a862491e331cfb78,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391337206131127, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391337206131127, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391337206131127, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -22835,26 +22812,6 @@ PrefabInstance:
     - target: {fileID: 2981391337206131127, guid: 965400e3fce33cf4a862491e331cfb78,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391337206131127, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391337274180635, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391338151739628, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981391338703842016, guid: 965400e3fce33cf4a862491e331cfb78,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -22963,7 +22920,7 @@ PrefabInstance:
     - target: {fileID: 7741200533204461752, guid: bff04dae03e8d8a40b5db6be7f64db98,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7741200533204461752, guid: bff04dae03e8d8a40b5db6be7f64db98,
         type: 3}
@@ -23020,6 +22977,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 732c0de21fbcd4a2eaa23fe81f207c08, type: 2}
+    - target: {fileID: 7741200533204461755, guid: bff04dae03e8d8a40b5db6be7f64db98,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bff04dae03e8d8a40b5db6be7f64db98, type: 3}
 --- !u!1001 &9031737430212019186

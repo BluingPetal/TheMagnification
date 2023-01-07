@@ -23,16 +23,19 @@ MonoBehaviour:
   level1_attackRoutine: 7
   level1_attackPower: 5
   level1_cost: 100
+  level1_continuousShot: 1
   level2_hp: 20
   level2_attackRange: 16
   level2_attackRoutine: 5
   level2_attackPower: 10
   level2_cost: 200
+  level2_continuousShot: 3
   level3_hp: 30
   level3_attackRange: 24
   level3_attackRoutine: 3
   level3_attackPower: 20
   level3_cost: 300
+  level3_continuousShot: 5
   bulletSpeed: 30
   bulletScale: 1
   bulletParticle: {fileID: 19800000, guid: cdf14baff693fbc439f8c859529a63a6, type: 3}

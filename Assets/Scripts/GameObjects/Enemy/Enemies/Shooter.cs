@@ -122,6 +122,19 @@ public class Shooter : MonoBehaviour
                 bulletParticle = machineGun.data.bulletParticle;
                 return;
             }
+            Rocket rocket= owner.GetComponent<Rocket>();
+            if (rocket != null)
+            {
+                Debug.Log(string.Format("{0} : rocket", owner.name));
+
+                bulletPrefab = rocket.data.rocketPrefab;
+                bulletSpeed = rocket.data.rocketSpeed;
+                attackPower = rocket.attackPower;
+                bulletScale = rocket.data.rocketScale;
+                bulletParticle = rocket.data.rocketShootParticle;
+                explodeParticle = rocket.data.rocketExplosion;
+                return;
+            }
         }
     }
 

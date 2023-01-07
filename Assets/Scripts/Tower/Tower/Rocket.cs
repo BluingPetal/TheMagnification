@@ -2,24 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class MachineGun : PlaceableTower
+public class Rocket : PlaceableTower
 {
-    public MachineGunData data;
+    public RocketData data;
     [SerializeField]
     private Shooter level1_shooter;
     [SerializeField]
-    private Shooter level2_shooter;
+    private Shooter level2_shooter1;
+    [SerializeField]
+    private Shooter level2_shooter2;
+    [SerializeField]
+    private Shooter level2_shooter3;
     [SerializeField]
     private Shooter level3_shooter1;
     [SerializeField]
     private Shooter level3_shooter2;
+    [SerializeField]
+    private Shooter level3_shooter3;
+    [SerializeField]
+    private Shooter level3_shooter4;
+
 
     private void Awake()
     {
         name = data.name;
         // 모든 자식 비활성화
-        for(int i = 0; i<3;i++)
+        for (int i = 0; i < 3; i++)
             transform.GetChild(i).gameObject.SetActive(false);
         // curLevel에 해당하는 자식만 활성화
         // curLevel은 추후 buildManager이나 InventoryManager에서 지정
@@ -27,9 +35,13 @@ public class MachineGun : PlaceableTower
 
         // shooter setting
         level1_shooter.owner = this.gameObject;
-        level2_shooter.owner = this.gameObject; 
+        level2_shooter1.owner = this.gameObject;
+        level2_shooter2.owner = this.gameObject;
+        level2_shooter3.owner = this.gameObject;
         level3_shooter1.owner = this.gameObject;
-        level3_shooter2.owner = this.gameObject; 
+        level3_shooter2.owner = this.gameObject;
+        level3_shooter3.owner = this.gameObject;
+        level3_shooter4.owner = this.gameObject;
     }
     protected override void SetData()
     {
@@ -77,11 +89,15 @@ public class MachineGun : PlaceableTower
                 level1_shooter.Shoot(target);
                 break;
             case 2:
-                level2_shooter.Shoot(target);
+                level2_shooter1.Shoot(target);
+                level2_shooter2.Shoot(target);
+                level2_shooter3.Shoot(target);
                 break;
             case 3:
                 level3_shooter1.Shoot(target);
                 level3_shooter2.Shoot(target);
+                level3_shooter3.Shoot(target);
+                level3_shooter4.Shoot(target);
                 break;
         }
     }

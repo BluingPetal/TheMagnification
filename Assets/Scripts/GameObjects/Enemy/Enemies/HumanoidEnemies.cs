@@ -7,7 +7,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum HumanoidEnemyState { Walk, WalkToTarget, NearAttack, Attack }
+public enum HumanoidEnemyState { Walk, WalkToTarget, NearAttack, Attack, Dead }
 
 public class HumanoidEnemies : WalkEnemy
 {
@@ -205,12 +205,16 @@ public class HumanoidEnemies : WalkEnemy
 
     public override void TakeDamage(float damage)
     {
+        Debug.Log(string.Format("take damage : {0}",hp));
         HP -= damage;
-        if(HP < 0)
+        if(HP <= 0)
         {
             gameObject.GetComponent<Collider>().enabled = false;
-            // 죽는 애니메이터 bool
             isMove = false;
+            if (state == HumanoidEnemyState.Attack || state == HumanoidEnemyState.NearAttack)
+                StopCoroutine(attackCoroutine);
+            state = HumanoidEnemyState.Dead;
+            animator.SetBool("IsDead", true);
             GameManager.Instance.CheckIfWaveDone();
         }
     }

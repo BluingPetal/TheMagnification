@@ -17,6 +17,6 @@ public class Friends : MonoBehaviour, IDamageable
         Debug.Log(string.Format("Hurt {0}", damage));
         hp -= damage;
         if(hp <= 0) Destroy(gameObject);
-        Debug.Log(hp.ToString());
+        //Debug.Log(hp.ToString());
     }
 }

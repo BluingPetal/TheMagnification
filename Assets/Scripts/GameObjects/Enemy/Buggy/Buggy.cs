@@ -14,8 +14,8 @@ public class Buggy : Cars
         prefab = data.prefab;
         bulletPrefab = data.bulletPrefab;
 
-        hp = data.hp;
-        speed = data.speed;
+        maxHp = hp = data.hp;
+        maxSpeed = speed = data.speed;
         attackRange = data.attackRange;
         attackRoutine = data.attackRoutine;
         attackPower = data.attackPower;

@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class WalkEnemy : MonoBehaviour, IDamageable
 {
     // scriptableObject에 공통적으로 있는 정보들
-    public new string name;
+    protected new string name;
     protected string description;
     protected Sprite icon;
     protected GameObject prefab;
@@ -24,6 +24,7 @@ public class WalkEnemy : MonoBehaviour, IDamageable
     protected float attackPower;
 
     // class 변수
+    [HideInInspector]
     public int startWayNum = 1;        // 경로 종류
     private int nextIndex;          // 향하고 있는 인덱스
     protected Vector3 nextPos;      // 향하고 있는 인덱스의 위치

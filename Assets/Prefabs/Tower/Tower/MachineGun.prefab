@@ -277,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 489113303678961223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 489113303873431604}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 0
-  isInstalled: 1
+  isInstalled: 0
   level1_topTransform: {fileID: 1599112041811919076}
   level2_topTransform: {fileID: 1081884329235015266}
   level3_topTransform: {fileID: 793352864020780704}

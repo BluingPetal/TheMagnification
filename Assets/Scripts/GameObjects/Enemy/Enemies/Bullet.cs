@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -23,7 +24,6 @@ public class Bullet : MonoBehaviour
     public ParticleSystem explodeParticle = null;
 
     private CapsuleCollider colldier;
-    private bool isAlreadyDamaged;
 
     private void Awake()
     {
@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
     {
         this.gameObject.transform.localScale = this.gameObject.transform.lossyScale * bulletScale;
         Destroy(gameObject, lifeTime);
-        isAlreadyDamaged = false;
     }
 
     private void FixedUpdate()
@@ -71,16 +70,20 @@ public class Bullet : MonoBehaviour
                 || (ownerLayer == LayerMask.NameToLayer("Friend") && hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")))
             {
                 Debug.Log("raycast dead");
-                IDamageable damageableTarget = hit.transform.gameObject.GetComponent<IDamageable>();
-                damageableTarget?.TakeDamage(attackPower);
+                // IDamageable damageableTarget = hit.transform.gameObject.GetComponent<IDamageable>();
+                // damageableTarget?.TakeDamage(attackPower);
+                // 타겟이 없어지지 않았을 경우 무조건 타겟에게 데미지가 들어가도록 수정
+                if (!target.IsDestroyed())
+                {
+                    IDamageable damageableTarget = target.transform.gameObject.GetComponent<IDamageable>();
+                    damageableTarget?.TakeDamage(attackPower);
+                }
 
                 // explode 효과
                 if (explodeParticle != null)
                     Instantiate(explodeParticle, hit.point, Quaternion.LookRotation(hit.normal));
                 // 총알(자신) 반응
                 Destroy(gameObject);
-
-                isAlreadyDamaged = true;
             }
 
             // Debug.Log(string.Format("owner layer : {0}, hit layer : {1}", LayerMask.LayerToName(ownerLayer), hit.collider.gameObject.layer.ToString()));

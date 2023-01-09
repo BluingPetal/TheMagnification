@@ -24,6 +24,13 @@ public class PlaceableTower : PlaceableObject
         base.Start();
         SetData();
         attackSubSeconds = new WaitForSeconds(0.3f);
+
+        // 모든 자식 비활성화
+        for (int i = 0; i < 3; i++)
+            transform.GetChild(i).gameObject.SetActive(false);
+        // curLevel에 해당하는 자식만 활성화
+        // curLevel은 추후 buildManager이나 InventoryManager에서 지정
+        transform.GetChild(curLevel - 1).gameObject.SetActive(true);
     }
     protected override IEnumerator AttackDelay()
     {

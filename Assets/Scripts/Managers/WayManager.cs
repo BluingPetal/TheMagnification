@@ -12,7 +12,7 @@ public class WayManager : SingleTon<WayManager>
     public string[] WalkingWayName { get; private set; }
     public string[] FlyingWayName { get; private set; }
 
-    public List<Transform>[] WalkingWayPoints { get; private set; }
+    public List<Transform>[] WalkingWayPoints { get; private set; } // 리스트 배열
     public List<Transform>[] FlyingWayPoints { get; private set; }
     
     private void Awake()

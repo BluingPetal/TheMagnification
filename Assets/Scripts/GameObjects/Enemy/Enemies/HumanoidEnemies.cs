@@ -203,4 +203,15 @@ public class HumanoidEnemies : WalkEnemy
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        HP -= damage;
+        if(HP < 0)
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
+            // 죽는 애니메이터 bool
+            isMove = false;
+            GameManager.Instance.CheckIfWaveDone();
+        }
+    }
 }

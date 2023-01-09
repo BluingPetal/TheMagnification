@@ -13,6 +13,9 @@ public class HPbarUI : MonoBehaviour
 
     public void ChangeHPBarUI(float maxHP, float curHP)
     {
-        transform.GetChild(1).GetComponent<Image>().fillAmount = curHP / maxHP;
+        if(curHP > 0)
+            transform.GetChild(1).GetComponent<Image>().fillAmount = curHP / maxHP;
+        else
+            transform.GetChild(1).GetComponent<Image>().fillAmount = 0;
     }
 }

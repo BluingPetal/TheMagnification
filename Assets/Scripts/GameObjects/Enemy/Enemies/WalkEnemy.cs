@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class WalkEnemy : MonoBehaviour, IDamageable
 {
     // scriptableObject에 공통적으로 있는 정보들
-    protected new string name;
+    public new string name;
     protected string description;
     protected Sprite icon;
     protected GameObject prefab;
@@ -24,7 +24,7 @@ public class WalkEnemy : MonoBehaviour, IDamageable
     protected float attackPower;
 
     // class 변수
-    private int startWayNum;        // 경로 종류
+    public int startWayNum = 1;        // 경로 종류
     private int nextIndex;          // 향하고 있는 인덱스
     protected Vector3 nextPos;      // 향하고 있는 인덱스의 위치
     private string curIndexName;    // enter된 오브젝트의 이름이 중복되면 index++되는 것을 방지하기 위함
@@ -47,7 +47,7 @@ public class WalkEnemy : MonoBehaviour, IDamageable
     virtual protected void Start()
     {
         // TODO : 정해진 위치에서 스폰되도록 구현
-        startWayNum = 1;
+        //startWayNum = 1;
         //Debug.Log(string.Format("{0}번째 길을 선택", startWayNum));
         nextIndex = 0;
         nextPos = WayManager.Instance.WalkingWayPoints[startWayNum][nextIndex].position;

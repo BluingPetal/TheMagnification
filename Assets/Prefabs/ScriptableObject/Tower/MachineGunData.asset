@@ -18,8 +18,8 @@ MonoBehaviour:
   prefab: {fileID: 489113303678961223, guid: 1ded9969317a5b5429332e860f182f63, type: 3}
   bulletPrefab: {fileID: 5664244266537763847, guid: 188a032b655feb7408fd9357d1c4af0d,
     type: 3}
-  level1_hp: 10
-  level1_attackRange: 8
+  level1_hp: 5
+  level1_attackRange: 20
   level1_attackRoutine: 7
   level1_attackPower: 5
   level1_cost: 100

@@ -54,10 +54,14 @@ public class BuildManager : SingleTon<BuildManager>
             }
         }
 
-        instantiatedPrefab = Instantiate(selectedPlaceableObj, CalculateHitPos(), Quaternion.identity);
-        ChangeMat(ghostMaterial);
-        instantiatedPrefab.GetComponent<Collider>().enabled = false;
-        prefabMouseFollowCoroutine = StartCoroutine(prefabMouseFollow());
+        if (CalculateHitPos() != Vector3.zero)
+        {
+            instantiatedPrefab = Instantiate(selectedPlaceableObj, CalculateHitPos(), Quaternion.identity);
+            ChangeMat(ghostMaterial);
+            instantiatedPrefab.GetComponent<Collider>().enabled = false;
+            prefabMouseFollowCoroutine = StartCoroutine(prefabMouseFollow());
+        }
+        else DoneSelected();
     }
 
     private IEnumerator prefabMouseFollow() // 선택된 프리팹이 마우스를 따라다니도록 구현
@@ -73,6 +77,11 @@ public class BuildManager : SingleTon<BuildManager>
                 }
                 else if (selectedPlace != null)
                     instantiatedPrefab.transform.position = selectedPlace.transform.position;
+                else if (CalculateHitPos() == Vector3.zero)
+                {
+                    DoneSelected();
+                    yield break;
+                }
                 else
                 {
                     instantiatedPrefab.transform.position = CalculateHitPos();
@@ -99,7 +108,7 @@ public class BuildManager : SingleTon<BuildManager>
             return hit.point;
         }
         else
-            return Vector3.positiveInfinity;
+            return Vector3.zero;
     }
 
     public void Build()

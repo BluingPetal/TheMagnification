@@ -20,6 +20,7 @@ MonoBehaviour:
     type: 3}
   missilePrefab: {fileID: 5664244266537763847, guid: 4eb07129c05c4b842b3190e931e993df,
     type: 3}
+  cost: 30
   hp: 50
   speed: 10
   attackRange: 15

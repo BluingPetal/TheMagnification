@@ -11,6 +11,7 @@ public class SoldierData : ScriptableObject
     public Sprite icon;
     public GameObject prefab;
     public GameObject bulletPrefab;
+    public int cost;
 
     [Header("Stats")]
     public float hp;

@@ -20,6 +20,7 @@ public class Soldier : HumanoidEnemies
         icon = data.icon;
         prefab = data.prefab;
         bulletPrefab = data.bulletPrefab;
+        cost = data.cost;
 
         maxHp = hp = data.hp;
         maxSpeed = speed = data.speed;

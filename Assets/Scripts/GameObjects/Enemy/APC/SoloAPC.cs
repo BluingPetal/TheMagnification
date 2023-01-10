@@ -26,6 +26,7 @@ public class SoloAPC : Cars
         prefab = data.prefab;
         bulletPrefab = data.bulletPrefab;
         missilePrefab = data.missilePrefab;
+        cost = data.cost;
 
         maxHp = hp = data.hp;
         maxSpeed = speed = data.speed;

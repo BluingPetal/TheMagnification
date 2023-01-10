@@ -12,6 +12,7 @@ public class APCData : ScriptableObject
     public GameObject prefab;
     public GameObject bulletPrefab;
     public GameObject missilePrefab;
+    public int cost;
 
     [Header("Stats")]
     public float hp;

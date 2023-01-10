@@ -14,6 +14,7 @@ public class WalkEnemy : MonoBehaviour, IDamageable
     protected string description;
     protected Sprite icon;
     protected GameObject prefab;
+    protected int cost;
 
     protected float maxHp;
     protected float hp;

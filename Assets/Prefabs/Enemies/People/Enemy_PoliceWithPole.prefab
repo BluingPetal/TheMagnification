@@ -1669,7 +1669,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &4491081388849208317
 CapsuleCollider:
@@ -1697,7 +1697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3e5ac85aa1c874a8a68d7baa6ae3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   startWayNum: 0
   rotationSpeed: 10
   OnHpChanged:
@@ -1718,6 +1717,8 @@ MonoBehaviour:
   animator: {fileID: 4470524815935779111}
   topTransform: {fileID: 3312140462672558342}
   nearAttackTargetDistance: 3
+  coinDropParticle: {fileID: 3666662806955694044, guid: 4940a40dcc528a74f8b53a54b052fba7,
+    type: 3}
   data: {fileID: 11400000, guid: 6db40cb8f1f059046abe0b826b429b2c, type: 2}
 --- !u!1 &4496629787797113829
 GameObject:

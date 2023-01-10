@@ -18,6 +18,8 @@ public class HumanoidEnemies : WalkEnemy
     private Transform topTransform; // 상체 설정
     [SerializeField]
     protected float nearAttackTargetDistance;
+    [SerializeField]
+    private ParticleSystem coinDropParticle;
 
     protected HumanoidEnemyState state;
     private Coroutine searchTargetCoroutine;
@@ -209,13 +211,16 @@ public class HumanoidEnemies : WalkEnemy
         HP -= damage;
         if(HP <= 0)
         {
-            gameObject.GetComponent<Collider>().enabled = false;
+            gameObject.GetComponent<CapsuleCollider>().height = 0.5f;
+            gameObject.layer = LayerMask.NameToLayer("DeadObject");
             isMove = false;
             if (state == HumanoidEnemyState.Attack || state == HumanoidEnemyState.NearAttack)
                 StopCoroutine(attackCoroutine);
             state = HumanoidEnemyState.Dead;
             animator.SetBool("IsDead", true);
+            Instantiate(coinDropParticle, transform.position, Quaternion.identity);
             GameManager.Instance.CheckIfWaveDone();
+            PlayerStatManager.Instance.MoneyChange(cost);
         }
     }
 }

@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   prefab: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+  cost: 10
   hp: 50
   speed: 1
   runSpeed: 3

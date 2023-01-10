@@ -18,6 +18,7 @@ MonoBehaviour:
   prefab: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
   bulletPrefab: {fileID: 5664244266537763847, guid: 0cb9c9d3009178b4990359ff7ed0d56d,
     type: 3}
+  cost: 10
   hp: 10
   speed: 5
   attackRange: 10

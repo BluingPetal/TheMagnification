@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,9 @@ public class PlayerStatManager : SingleTon<PlayerStatManager>
     public UnityEvent OnChangeMoney;
     [HideInInspector]
     public UnityEvent OnChangeLife;
+
+    [SerializeField]
+    private GameObject coinEarnedUI;
 
     public int Money
     {
@@ -32,13 +36,10 @@ public class PlayerStatManager : SingleTon<PlayerStatManager>
         Life = 300;
     }
 
-    public void EarnMoney(int money)
+    public void MoneyChange(int money)
     {
         Money += money;
-    }
-
-    public void UseMoney(int money)
-    {
-        Money -= money;
+        GameObject moneyText = Instantiate(coinEarnedUI);
+        moneyText.GetComponent<CoinEarnedUI>().ChangeCoinText(money);
     }
 }

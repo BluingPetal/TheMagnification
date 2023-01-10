@@ -66,7 +66,7 @@ public class PlaceableObject : MonoBehaviour, IDamageable
             if (colliders[i].gameObject.layer != LayerMask.NameToLayer("Enemy"))
                 continue;
             // 2. Target이 죽은 경우 ( // TODO : state 참조해서 처리 필요)
-            else if (colliders[i].gameObject.IsDestroyed())
+            else if (colliders[i].gameObject.layer == LayerMask.NameToLayer("DeadObject"))
                 continue;
 
             // 3. 앞에 장애물이 없을 경우
@@ -82,7 +82,7 @@ public class PlaceableObject : MonoBehaviour, IDamageable
                 }
                 else if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
                     continue;
-                else if (hit.collider.gameObject.IsDestroyed())
+                else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("DeadObject"))
                     continue;
             }
 
@@ -140,7 +140,7 @@ public class PlaceableObject : MonoBehaviour, IDamageable
     }
     public void Sell()
     {
-        PlayerStatManager.Instance.EarnMoney((int)(cost * 0.5));
+        PlayerStatManager.Instance.MoneyChange((int)(cost * 0.5));
     }
     virtual protected IEnumerator AttackDelay()
     {

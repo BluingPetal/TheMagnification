@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SubsystemsImplementation;
 
 public class WaveManager : SingleTon<WaveManager>
@@ -17,16 +18,16 @@ public class WaveManager : SingleTon<WaveManager>
     [Header("Settings")]
     [SerializeField]
     private float routine;
-    [SerializeField]
-    private float waveStartRoutine;
 
     private Queue<GameObject> CurWaveObj;
     private List<GameObject> SpawnedObj;
     private int curWave;
     private Coroutine respawnCoroutine;
-    private Coroutine waveStartCoroutine;
     private WaitForSeconds respawnTime;
-    private WaitForSeconds waveStartTime;
+
+    //Event
+    [HideInInspector]
+    public UnityEvent<int> OnWaveChanged;
 
     private void Awake()
     {
@@ -34,20 +35,36 @@ public class WaveManager : SingleTon<WaveManager>
         CurWaveObj = new Queue<GameObject>();
         SpawnedObj = new List<GameObject>();
         respawnTime = new WaitForSeconds(routine);
-        waveStartTime = new WaitForSeconds(waveStartRoutine);
     }
 
-    private void Start()
+    public void GoToNextWave()
     {
-        waveStartCoroutine = StartCoroutine(WaveStart());
+        WaveEnd();
+        WaveStart();
     }
 
-    private IEnumerator WaveStart()
+    public bool CheckEnemyStatus()
     {
+        if (CurWaveObj.Count > 0)
+            return false;
+
+        for(int i=0; i<SpawnedObj.Count; i++)
+        {
+            WalkEnemy spawnedObj = SpawnedObj[i].GetComponent<WalkEnemy>();
+            if(spawnedObj.HP > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    private void WaveStart()
+    {
+        // TODO : wave가 모두 끝났을 때 엔딩 추가
         curWave++;
-        yield return waveStartTime;
+        OnWaveChanged?.Invoke(curWave);
 
-        switch(curWave)
+        switch (curWave)
         {
             case 1:
                 for (int i = 0; i < Wave1.Count; i++)
@@ -70,7 +87,7 @@ public class WaveManager : SingleTon<WaveManager>
 
     private IEnumerator Spawn()
     {
-        while(CurWaveObj.Count > 0)
+        while (CurWaveObj.Count > 0)
         {
             GameObject obj = CurWaveObj.Dequeue();
             if (obj != null)
@@ -83,9 +100,9 @@ public class WaveManager : SingleTon<WaveManager>
                     instantiatedObj.GetComponent<WalkEnemy>().startWayNum = 0;
                     SpawnedObj.Add(instantiatedObj);
                 }
-                
+
                 // 오른쪽에 생성될 오브젝트들의 이름
-                if(obj.name == "Enemy_Knight" || obj.name == "Enemy_APC1"
+                if (obj.name == "Enemy_Knight" || obj.name == "Enemy_APC1"
                     || obj.name == "Enemy_APC3" || obj.name == "Enemy_Buggy2")
                 {
                     GameObject instantiatedObj = Instantiate(obj.gameObject, WayManager.Instance.WalkingWayPoints[1][0].position, Quaternion.identity);
@@ -96,31 +113,6 @@ public class WaveManager : SingleTon<WaveManager>
                 yield return respawnTime;
             }
         }
-    }
-
-    public void GoToNextWave()
-    {
-        //if(CheckEnemyStatus())
-        //{
-            WaveEnd();
-            waveStartCoroutine = StartCoroutine(WaveStart());
-        //}
-    }
-
-    public bool CheckEnemyStatus()
-    {
-        if (CurWaveObj.Count > 0)
-            return false;
-
-        for(int i=0; i<SpawnedObj.Count; i++)
-        {
-            WalkEnemy spawnedObj = SpawnedObj[i].GetComponent<WalkEnemy>();
-            if(spawnedObj.HP > 0)
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void WaveEnd()
@@ -138,5 +130,6 @@ public class WaveManager : SingleTon<WaveManager>
     {
         public int num;
         public GameObject obj;
+        public string type;
     }
 }

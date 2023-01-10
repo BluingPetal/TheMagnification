@@ -10,6 +10,7 @@ public class PoliceWithPoleData : ScriptableObject
     public string description;
     public Sprite icon;
     public GameObject prefab;
+    public int cost;
 
     [Header("Stats")]
     public float hp;

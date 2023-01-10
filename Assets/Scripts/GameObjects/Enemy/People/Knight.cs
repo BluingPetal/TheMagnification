@@ -19,6 +19,7 @@ public class Knight : HumanoidEnemies
         description = data.description;
         icon = data.icon;
         prefab = data.prefab;
+        cost = data.cost;
 
         maxHp = hp = data.hp;
         maxSpeed = speed = data.speed;

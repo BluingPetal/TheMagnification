@@ -29,9 +29,12 @@ public class PlaceableObject : MonoBehaviour, IDamageable
 
     protected Transform target;
 
+    public int Cost { get { return cost; } }
+
     virtual protected void Start()
     {
         Debug.Log("start");
+        SetData();
         updateIntervalTime = 0.1f;
         searchSeconds = new WaitForSeconds(updateIntervalTime);
         attackSeconds = new WaitForSeconds(attackRoutine);
@@ -164,4 +167,6 @@ public class PlaceableObject : MonoBehaviour, IDamageable
     }
 
     virtual public void TakeDamage(float damage) { }
+
+    virtual protected void SetData() { }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15465fc38661b14fb199a819356c8d0, type: 3}
   m_Name: RocketData
   m_EditorClassIdentifier: 
-  name: RocketTower
+  name: Rocket Tower
   description: 
   icon: {fileID: 21300000, guid: fa91237b5487541158165bfce6ebfa0c, type: 3}
   prefab: {fileID: 2981391337206131126, guid: 965400e3fce33cf4a862491e331cfb78, type: 3}

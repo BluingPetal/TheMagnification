@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b103e34f340937b4a9a5de8262d0b697, type: 3}
   m_Name: MachineGunData
   m_EditorClassIdentifier: 
-  name: MachineGunTower
+  name: Machine Gun Tower
   description: 
   icon: {fileID: 21300000, guid: 3631244dc04164d079a3302a39dbc0c6, type: 3}
   prefab: {fileID: 489113303678961223, guid: 1ded9969317a5b5429332e860f182f63, type: 3}
@@ -22,7 +22,7 @@ MonoBehaviour:
   level1_attackRange: 20
   level1_attackRoutine: 7
   level1_attackPower: 5
-  level1_cost: 100
+  level1_cost: 50
   level1_continuousShot: 1
   level2_hp: 20
   level2_attackRange: 16

@@ -28,31 +28,9 @@ public class BuildManager : SingleTon<BuildManager>
         instantiatedPrefab = null;
     }
 
-    public void InstantiateTower(Sprite uiSprite)
+    public void InstantiateTower(Sprite uiSprite, out int cost)
     {
-        selectedPlaceableObj = null;
-        for (int i = 0; i < PlaceableDatas.Count; i++)
-        {
-            // TODO : PlaceableObject 추가하기
-            if (PlaceableDatas[i] is MachineGunData)
-            {
-                MachineGunData data = PlaceableDatas[i] as MachineGunData;
-                if (data.icon == uiSprite)
-                {
-                    selectedPlaceableObj = data.prefab;
-                    break;
-                }
-            }
-            else if (PlaceableDatas[i] is RocketData)
-            {
-                RocketData data = PlaceableDatas[i] as RocketData;
-                if (data.icon == uiSprite)
-                {
-                    selectedPlaceableObj = data.prefab;
-                    break;
-                }
-            }
-        }
+        selectedPlaceableObj = FoundTower(uiSprite, out cost);
 
         if (CalculateHitPos() != Vector3.zero)
         {
@@ -62,6 +40,36 @@ public class BuildManager : SingleTon<BuildManager>
             prefabMouseFollowCoroutine = StartCoroutine(prefabMouseFollow());
         }
         else DoneSelected();
+    }
+
+    public GameObject FoundTower(Sprite uiSprite, out int cost)
+    {
+        cost = 0;
+        for (int i = 0; i < PlaceableDatas.Count; i++)
+        {
+            // TODO : PlaceableObject 추가하기
+            if (PlaceableDatas[i] is MachineGunData)
+            {
+                MachineGunData data = PlaceableDatas[i] as MachineGunData;
+                if (data.icon == uiSprite)
+                {
+                    //selectedPlaceableObj = data.prefab;
+                    cost = data.level1_cost;
+                    return data.prefab;
+                }
+            }
+            else if (PlaceableDatas[i] is RocketData)
+            {
+                RocketData data = PlaceableDatas[i] as RocketData;
+                if (data.icon == uiSprite)
+                {
+                    //selectedPlaceableObj = data.prefab;
+                    cost = data.level1_cost;
+                    return data.prefab;
+                }
+            }
+        }
+        return null;
     }
 
     private IEnumerator prefabMouseFollow() // 선택된 프리팹이 마우스를 따라다니도록 구현
@@ -123,6 +131,9 @@ public class BuildManager : SingleTon<BuildManager>
         GameObject installedObj = Instantiate(selectedPlaceableObj, selectedPlace.transform.position, selectedPlace.transform.rotation);
         selectedPlace.isOccupied = true;
         installedObj.GetComponent<PlaceableObject>().isInstalled = true;
+
+        // cost만큼 돈 빼주기
+        //PlayerStatManager.Instance.MoneyChange(-installedObj.GetComponent<PlaceableObject>().Cost);
     }
 
     public void DoneSelected()

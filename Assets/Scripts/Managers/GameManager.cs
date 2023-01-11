@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.Events;
@@ -46,5 +47,17 @@ public class GameManager : SingleTon<GameManager>
         WaveTime = 10;
         // after 활성화, before 비활성화 
         OnWaveChanged?.Invoke();
+    }
+
+    public void OpenShop()
+    {
+        // 버튼을 눌렀을 경우 상점창 열기
+        GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject?.SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        // 닫기 버튼을 눌렀을 경우 상점창 닫기
+        GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject?.SetActive(false);
     }
 }

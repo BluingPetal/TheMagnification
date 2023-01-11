@@ -22,7 +22,6 @@ public class PlaceableTower : PlaceableObject
     protected override void Start()
     {
         base.Start();
-        SetData();
         attackSubSeconds = new WaitForSeconds(0.3f);
 
         // 모든 자식 비활성화
@@ -74,6 +73,4 @@ public class PlaceableTower : PlaceableObject
 
         SetData();
     }
-
-    virtual protected void SetData() { }
 }

@@ -38,15 +38,15 @@ public class ShopManager : SingleTon<ShopManager>
         }
     }
 
-    public void Buy(int dataIndex)
+    public void Buy(int dataIndex, int num)
     {
         // 인벤토리에 넣기
         if (ItemDataList[dataIndex] is ShootTowerData)
         {
             ShootTowerData data = ItemDataList[dataIndex] as ShootTowerData;
-            if (PlayerStatManager.Instance.Money >= data.level1_cost)
+            if (PlayerStatManager.Instance.Money >= data.level1_cost * num)
             {
-                PlayerStatManager.Instance.MoneyChange(-data.level1_cost);
+                PlayerStatManager.Instance.MoneyChange(-data.level1_cost * num);
             }
             else
             {

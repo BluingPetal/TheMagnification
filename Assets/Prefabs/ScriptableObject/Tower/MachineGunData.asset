@@ -9,28 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b103e34f340937b4a9a5de8262d0b697, type: 3}
+  m_Script: {fileID: 11500000, guid: 57bc6c72511bd454ebd10c06d924b958, type: 3}
   m_Name: MachineGunData
   m_EditorClassIdentifier: 
   name: Machine Gun Tower
-  description: 
   icon: {fileID: 21300000, guid: 3631244dc04164d079a3302a39dbc0c6, type: 3}
   prefab: {fileID: 489113303678961223, guid: 1ded9969317a5b5429332e860f182f63, type: 3}
   bulletPrefab: {fileID: 5664244266537763847, guid: 188a032b655feb7408fd9357d1c4af0d,
     type: 3}
-  level1_hp: 5
   level1_attackRange: 20
   level1_attackRoutine: 7
   level1_attackPower: 5
   level1_cost: 50
   level1_continuousShot: 1
-  level2_hp: 20
   level2_attackRange: 16
   level2_attackRoutine: 5
   level2_attackPower: 10
   level2_cost: 200
   level2_continuousShot: 3
-  level3_hp: 30
   level3_attackRange: 24
   level3_attackRoutine: 3
   level3_attackPower: 20
@@ -39,3 +35,4 @@ MonoBehaviour:
   bulletSpeed: 30
   bulletScale: 1
   bulletParticle: {fileID: 19800000, guid: cdf14baff693fbc439f8c859529a63a6, type: 3}
+  bulletExplosion: {fileID: 0}

@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Friends/MachineGun")]
-public class MachineGunData : ScriptableObject
+[CreateAssetMenu(menuName = "Friends/ShootTower")]
+public class ShootTowerData : ScriptableObject
 {
     [Header("Info")]
     public new string name;
@@ -37,4 +36,5 @@ public class MachineGunData : ScriptableObject
 
     [Header("FX")]
     public ParticleSystem bulletParticle;
+    public ParticleSystem bulletExplosion;
 }

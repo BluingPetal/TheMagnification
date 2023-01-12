@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MachineGun : PlaceableTower
 {
-    public MachineGunData data;
+    public ShootTowerData data;
     [SerializeField]
     private Shooter level1_shooter;
     [SerializeField]
@@ -30,7 +30,6 @@ public class MachineGun : PlaceableTower
         switch (curLevel)
         {
             case 1:
-                maxHp = curHp = data.level1_hp; // 나중에 startHP로 바꾸어주기
                 attackRange = data.level1_attackRange;
                 attackRoutine = data.level1_attackRoutine;
                 attackSeconds = new WaitForSeconds(attackRoutine);
@@ -40,7 +39,6 @@ public class MachineGun : PlaceableTower
                 topTransform = level1_topTransform;
                 break;
             case 2:
-                maxHp = curHp = data.level2_hp;
                 attackRange = data.level2_attackRange;
                 attackRoutine = data.level2_attackRoutine;
                 attackSeconds = new WaitForSeconds(attackRoutine);
@@ -50,7 +48,6 @@ public class MachineGun : PlaceableTower
                 topTransform = level2_topTransform;
                 break;
             case 3:
-                maxHp = curHp = data.level3_hp;
                 attackRange = data.level3_attackRange;
                 attackRoutine = data.level3_attackRoutine;
                 attackSeconds = new WaitForSeconds(attackRoutine);
@@ -78,9 +75,5 @@ public class MachineGun : PlaceableTower
                 level3_shooter2.Shoot(target);
                 break;
         }
-    }
-
-    public override void TakeDamage(float damage)
-    {
     }
 }

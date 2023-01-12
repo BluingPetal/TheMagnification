@@ -117,7 +117,7 @@ public class Shooter : MonoBehaviour
 
                 bulletPrefab = machineGun.data.bulletPrefab;
                 bulletSpeed = machineGun.data.bulletSpeed;
-                attackPower = machineGun.attackPower;
+                attackPower = machineGun.AttackPower;
                 bulletScale = machineGun.data.bulletScale;
                 bulletParticle = machineGun.data.bulletParticle;
                 return;
@@ -127,12 +127,12 @@ public class Shooter : MonoBehaviour
             {
                 Debug.Log(string.Format("{0} : rocket", owner.name));
 
-                bulletPrefab = rocket.data.rocketPrefab;
-                bulletSpeed = rocket.data.rocketSpeed;
-                attackPower = rocket.attackPower;
-                bulletScale = rocket.data.rocketScale;
-                bulletParticle = rocket.data.rocketShootParticle;
-                explodeParticle = rocket.data.rocketExplosion;
+                bulletPrefab = rocket.data.bulletPrefab;
+                bulletSpeed = rocket.data.bulletSpeed;
+                attackPower = rocket.AttackPower;
+                bulletScale = rocket.data.bulletScale;
+                bulletParticle = rocket.data.bulletParticle;
+                explodeParticle = rocket.data.bulletExplosion;
                 return;
             }
         }

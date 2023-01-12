@@ -298,13 +298,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408d7a6c45608db4d9c094f21049c2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 0
   isInstalled: 0
   level1_topTransform: {fileID: 1599112041811919076}
   level2_topTransform: {fileID: 1081884329235015266}
   level3_topTransform: {fileID: 793352864020780704}
-  curLevel: 1
-  data: {fileID: 11400000, guid: 7af146aa8602ff74bbc6ce25a63905b6, type: 2}
+  data: {fileID: 11400000, guid: 585f1bf1fa3f3ca48b903c4d4b550327, type: 2}
   level1_shooter: {fileID: 95849178}
   level2_shooter: {fileID: 1834196952}
   level3_shooter1: {fileID: 2066758011}

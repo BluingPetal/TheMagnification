@@ -11,12 +11,15 @@ public class PlaceableTower : PlaceableObject
     [SerializeField]
     protected Transform level3_topTransform;
 
-    private WaitForSeconds attackSubSeconds;
+    private WaitForSeconds attackSubSeconds;    // 연발 간격
     protected int level1_continuousShot;
     protected int level2_continuousShot;
     protected int level3_continuousShot;
-    public int curLevel;
-    public int CurLevel { get { return curLevel; } set { curLevel = value; Upgrade(); } }
+
+    // data 설정을 위한 변수
+    protected int curLevel = 1;
+
+    public int CurLevel { get { return curLevel; } set { curLevel = value; if(curLevel > 1) Upgrade(curLevel); } }
 
 
     protected override void Start()
@@ -64,12 +67,13 @@ public class PlaceableTower : PlaceableObject
         }
     }
 
-    public void Upgrade() // 나중에 private로 바꾸기
+    public void Upgrade(int level) // 나중에 private로 바꾸기
     {
-        Debug.Log(curLevel);
-        curLevel++;
-        transform.GetChild(curLevel - 2).gameObject.SetActive(false);
-        transform.GetChild(curLevel - 1).gameObject.SetActive(true);
+        if (level > 3)
+            return;
+
+        transform.GetChild(level - 1).gameObject.SetActive(false);
+        transform.GetChild(level).gameObject.SetActive(true);
 
         SetData();
     }

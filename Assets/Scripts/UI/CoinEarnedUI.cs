@@ -25,11 +25,15 @@ public class CoinEarnedUI : MonoBehaviour
 
     public void ChangeCoinText(int coin)
     {
-        coinText.color = Color.yellow;
-        Debug.Log(coin);
         if (coin > 0)
+        {
+            coinText.color = Color.yellow;
             coinText.text = string.Format("+ {0}", coin);
+        }
         else
+        {
+            coinText.color = Color.red;
             coinText.text = string.Format("- {0}", Mathf.Abs(coin));
+        }
     }
 }

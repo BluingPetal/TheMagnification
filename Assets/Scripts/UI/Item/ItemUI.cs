@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,20 +17,28 @@ public class ItemUI : MonoBehaviour
     protected TextMeshProUGUI attackPowerUI;
     [SerializeField]
     protected TextMeshProUGUI attackRoutineUI;
+    [SerializeField]
+    private GameObject buyUIPrefab;
 
-    protected string itemName;
-    protected Sprite itemSprite;
-    protected int itemCost;
-    protected int attackPower;
-    protected int attackRoutine;
+    [HideInInspector]
+    public int index;
+    [HideInInspector]
+    public string itemName;
+    [HideInInspector]
+    public Sprite itemSprite;
+    [HideInInspector]
+    public int itemCost;
+    [HideInInspector]
+    public float attackPower;
+    [HideInInspector]
+    public float attackRoutine;
+
+    private GameObject instantiatedBuyUI;
 
     void Start()
     {
-        SetData();
         SetUI();
     }
-
-    virtual protected void SetData() { }
 
     private void SetUI()
     {
@@ -38,5 +47,16 @@ public class ItemUI : MonoBehaviour
         itemCostUI.text = string.Format("Cost : {0}", itemCost.ToString());
         attackPowerUI.text = string.Format("Attack Power : {0}", attackPower.ToString());
         attackRoutineUI.text = string.Format("Attack Routine : {0}", attackRoutine.ToString());
+    }
+
+    public void SelectItem()
+    {
+        if (instantiatedBuyUI == null || instantiatedBuyUI.IsDestroyed())
+        {
+            instantiatedBuyUI = Instantiate(buyUIPrefab);
+            BuyUI ui = instantiatedBuyUI.GetComponent<BuyUI>();
+            ui.itemName = itemName;
+            ui.index = index;
+        }
     }
 }

@@ -9,35 +9,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15465fc38661b14fb199a819356c8d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 57bc6c72511bd454ebd10c06d924b958, type: 3}
   m_Name: RocketData
   m_EditorClassIdentifier: 
   name: Rocket Tower
-  description: 
   icon: {fileID: 21300000, guid: fa91237b5487541158165bfce6ebfa0c, type: 3}
   prefab: {fileID: 2981391337206131126, guid: 965400e3fce33cf4a862491e331cfb78, type: 3}
-  rocketPrefab: {fileID: 5664244266537763847, guid: 188a032b655feb7408fd9357d1c4af0d,
+  bulletPrefab: {fileID: 5664244266537763847, guid: 188a032b655feb7408fd9357d1c4af0d,
     type: 3}
-  level1_hp: 10
   level1_attackRange: 20
   level1_attackRoutine: 5
   level1_attackPower: 10
   level1_cost: 100
   level1_continuousShot: 1
-  level2_hp: 20
   level2_attackRange: 20
   level2_attackRoutine: 4
   level2_attackPower: 20
   level2_cost: 200
   level2_continuousShot: 1
-  level3_hp: 30
   level3_attackRange: 30
   level3_attackRoutine: 3
   level3_attackPower: 30
   level3_cost: 300
   level3_continuousShot: 1
-  rocketSpeed: 20
-  rocketScale: 1
-  rocketShootParticle: {fileID: 19800008, guid: 8f611da60097c85438a2947021f045cf,
-    type: 3}
-  rocketExplosion: {fileID: 19800006, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+  bulletSpeed: 20
+  bulletScale: 1
+  bulletParticle: {fileID: 19800008, guid: 8f611da60097c85438a2947021f045cf, type: 3}
+  bulletExplosion: {fileID: 19800006, guid: 42f257b24c959a44794a35d032e9da12, type: 3}

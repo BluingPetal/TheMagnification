@@ -3,38 +3,43 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlaceableObject : MonoBehaviour, IDamageable
+public class PlaceableObject : MonoBehaviour
 {
+    // data에 있는 변수
     protected new string name;
-    protected float maxHp;
-    protected float curHp;
+    protected Sprite icon;
     protected float attackRange;
     protected float attackRoutine;
-    [HideInInspector]
-    public float attackPower;
+    protected float attackPower;
     protected int cost;
 
+    // build되기 위한 변수
     public bool isInstalled = false;
     private bool isAttack = false;
 
-    protected Transform topTransform;
+    // attack하기 위한 변수
+    protected Transform topTransform;   // target을 향해 고개를 돌릴 transform
 
     private Coroutine searchTargetCoroutine;
     protected Coroutine attackCoroutine;
-    WaitForSeconds searchSeconds;
+    private WaitForSeconds searchSeconds;
     protected WaitForSeconds attackSeconds;
 
-    private float updateIntervalTime;
-    private float minSqrDistance;
+    private float updateIntervalTime;   // 타겟을 search할 간격
+    private float minSqrDistance;       // 더 가까운 타겟을 공격하기 위한 최소 거리의 제곱
 
     protected Transform target;
 
+    // Properties - shop item에서 사용하기 위함 -> 나중에 없애기 데이터만 가지고 관리
+    public string Name { get { return name; } }
+    public Sprite Icon { get { return icon; } }
     public int Cost { get { return cost; } }
+    public float AttackPower { get { return attackPower; } }
+    public float AttackRoutine { get { return attackRoutine; } }
 
     virtual protected void Start()
     {
-        Debug.Log("start");
-        SetData();
+        SetData();          // 자식에서 각각 자신의 data를 받아와 세팅해줌
         updateIntervalTime = 0.1f;
         searchSeconds = new WaitForSeconds(updateIntervalTime);
         attackSeconds = new WaitForSeconds(attackRoutine);
@@ -65,28 +70,20 @@ public class PlaceableObject : MonoBehaviour, IDamageable
 
         for (int i = 0; i < colliders.Length; i++)
         {
-            // 1. enemy layer일 경우
+            // 1. Enemy layer일 경우
             if (colliders[i].gameObject.layer != LayerMask.NameToLayer("Enemy"))
                 continue;
-            // 2. Target이 죽은 경우 ( // TODO : state 참조해서 처리 필요)
+            // 2. Target이 죽은 경우 -> layer가 DeadObject로 변환됨
             else if (colliders[i].gameObject.layer == LayerMask.NameToLayer("DeadObject"))
                 continue;
 
-            // 3. 앞에 장애물이 없을 경우
+            // 3. 앞에 장애물이 없을 경우 -> backGroundLayer에 가려졌을 경우 타겟으로 인식하지 못함
             Vector3 posDiffWithTarget = (colliders[i].gameObject.transform.position - this.transform.position);
             Vector3 dirToTarget = posDiffWithTarget.normalized;
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, dirToTarget, out hit, attackRange))
+            if (Physics.Raycast(transform.position, dirToTarget, out hit, attackRange, LayerMask.NameToLayer("BackGround")))
             {
-                // 총알 레이어는 장애물이라고 생각하지 않음
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("FriendBullet"))
-                {
-                    // Do Nothing
-                }
-                else if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
-                    continue;
-                else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("DeadObject"))
-                    continue;
+                continue;
             }
 
             // 4. 모든 조건 충족 -> IDamageable 오브젝트가 있는 경우만 타겟 설정 가능
@@ -112,7 +109,7 @@ public class PlaceableObject : MonoBehaviour, IDamageable
             }
         }
 
-        if(target != null && !isAttack)
+        if(target != null && !isAttack) // 상태 설정 대신 bool 변수로 attack중임 인식
         {
             Attack();
             attackCoroutine = StartCoroutine(AttackDelay());
@@ -129,21 +126,12 @@ public class PlaceableObject : MonoBehaviour, IDamageable
         if (target != null)
         {
             // target을 바라보도록 구현
-            transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
-
-            // 자신의 y위치보다 target의 y위치가 더 높을 경우 상체만 위를 바라보도록 구현
-            // TODO : 공중 오브젝트 있을 때 주석 풀기 ( 다른 곳에서 쏠때의 파티클 시스템이 작동함 )
-            //if (target.position.y > transform.position.y)
-            //    topTransform.LookAt(target);
+            topTransform.LookAt(target);
 
             // 타겟을 향한 ray 그리기
             Vector3 posDiffWithTarget = target.gameObject.transform.position - this.transform.position;
             Debug.DrawRay(transform.position, posDiffWithTarget, Color.yellow);
         }
-    }
-    public void Sell()
-    {
-        PlayerStatManager.Instance.MoneyChange((int)(cost * 0.5));
     }
     virtual protected IEnumerator AttackDelay()
     {
@@ -154,8 +142,14 @@ public class PlaceableObject : MonoBehaviour, IDamageable
             Attack();
         }
     }
+    public void Sell() // -> 나중에 shop으로 할지 생각
+    {
+        PlayerStatManager.Instance.MoneyChange((int)(cost * 0.5));
+    }
 
     virtual protected void Attack() { }
+
+    virtual protected void SetData() { }
 
     virtual protected void OnDrawGizmos()
     {
@@ -165,8 +159,4 @@ public class PlaceableObject : MonoBehaviour, IDamageable
             Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-
-    virtual public void TakeDamage(float damage) { }
-
-    virtual protected void SetData() { }
 }

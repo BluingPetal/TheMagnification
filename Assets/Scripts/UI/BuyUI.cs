@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class BuyUI : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI nameText;
+    private TextMeshProUGUI nameCostText;
     [SerializeField]
     private TextMeshProUGUI numText;
 
@@ -14,14 +12,17 @@ public class BuyUI : MonoBehaviour
     public string itemName;
     [HideInInspector]
     public int index;
+    [HideInInspector]
+    public int cost;
 
     private int itemNum;
     private int ItemNum
     { get { return itemNum; } set { itemNum = value; numText.text = itemNum.ToString(); } }
 
+
     private void Start()
     {
-        nameText.text = string.Format("({0})", itemName);
+        nameCostText.text = string.Format("({0}) : {1}G", itemName, cost);
         ItemNum = 1;
     }
 

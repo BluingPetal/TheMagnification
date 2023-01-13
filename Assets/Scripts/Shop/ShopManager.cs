@@ -44,9 +44,10 @@ public class ShopManager : SingleTon<ShopManager>
         if (ItemDataList[dataIndex] is ShootTowerData)
         {
             ShootTowerData data = ItemDataList[dataIndex] as ShootTowerData;
-            if (PlayerStatManager.Instance.Money >= data.level1_cost * num)
+            if (PlayerStatManager.Instance.Money >= data.level1_cost * num) // 구매 가능할 경우
             {
                 PlayerStatManager.Instance.MoneyChange(-data.level1_cost * num);
+                InventoryManager.Instance.GetItem(data.name, ItemDataList[dataIndex], num);
             }
             else
             {

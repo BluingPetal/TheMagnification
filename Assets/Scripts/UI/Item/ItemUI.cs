@@ -33,11 +33,23 @@ public class ItemUI : MonoBehaviour
     [HideInInspector]
     public float attackRoutine;
 
-    private GameObject instantiatedBuyUI;
+    // instantiate되는 window를 보유하고 있는 컨테이너를 두어 자식을 한개만 보유하도록 함
+    // 창을 끄거나 다른 item ui를 클릭할 시 가지고 있는 자식을 destroy
+    private Transform buyUIcontainer;
 
-    void Start()
+    private void Awake()
+    {
+        buyUIcontainer = GameObject.Find("ShopCanvas").transform.GetChild(1);
+    }
+
+    private void Start()
     {
         SetUI();
+    }
+
+    private void OnDisable()
+    {
+        DestroyBuyUI();
     }
 
     private void SetUI()
@@ -51,12 +63,19 @@ public class ItemUI : MonoBehaviour
 
     public void SelectItem()
     {
-        if (instantiatedBuyUI == null || instantiatedBuyUI.IsDestroyed())
-        {
-            instantiatedBuyUI = Instantiate(buyUIPrefab);
-            BuyUI ui = instantiatedBuyUI.GetComponent<BuyUI>();
-            ui.itemName = itemName;
-            ui.index = index;
-        }
+        DestroyBuyUI();
+
+        GameObject instantiatedBuyUI = Instantiate(buyUIPrefab);
+        instantiatedBuyUI.transform.SetParent(buyUIcontainer);
+        BuyUI ui = instantiatedBuyUI.GetComponent<BuyUI>();
+        ui.itemName = itemName;
+        ui.index = index;
+        ui.cost = itemCost;
+    }
+
+    private void DestroyBuyUI()
+    {
+        if(buyUIcontainer.childCount > 0)
+            Destroy(buyUIcontainer.GetChild(0).gameObject);
     }
 }

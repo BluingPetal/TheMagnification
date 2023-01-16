@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class BuyUI : MonoBehaviour
+public class ConfirmUI : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI nameCostText;
@@ -51,5 +51,10 @@ public class BuyUI : MonoBehaviour
     {
         ShopManager.Instance.Buy(index, ItemNum);
         Destroy(this.gameObject);
+    }
+
+    public void SellItem()
+    {
+
     }
 }

@@ -306,6 +306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 5621488804183741935}
   itemNumText: {fileID: 5621488804358305865}
+  selectedItemUIPrefab: {fileID: 6616802465486344189, guid: 4305fe6d57e13554ea7cc19fa709051a,
+    type: 3}
   icon: {fileID: 0}
 --- !u!114 &3148129465087943839
 MonoBehaviour:
@@ -350,4 +352,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5621488805054650184}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 903750672976758881}
+        m_TargetAssemblyTypeName: InventoryItemUI, Assembly-CSharp
+        m_MethodName: InventoryItemSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

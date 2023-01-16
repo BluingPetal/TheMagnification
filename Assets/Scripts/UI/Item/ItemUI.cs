@@ -67,7 +67,7 @@ public class ItemUI : MonoBehaviour
 
         GameObject instantiatedBuyUI = Instantiate(buyUIPrefab);
         instantiatedBuyUI.transform.SetParent(buyUIcontainer);
-        BuyUI ui = instantiatedBuyUI.GetComponent<BuyUI>();
+        ConfirmUI ui = instantiatedBuyUI.GetComponent<ConfirmUI>();
         ui.itemName = itemName;
         ui.index = index;
         ui.cost = itemCost;

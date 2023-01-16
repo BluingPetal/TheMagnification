@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -27,7 +28,7 @@ public class ShopManager : SingleTon<ShopManager>
             {
                 ShootTowerData data = ItemDataList[i] as ShootTowerData;
                 ItemUI itemUI = Instantiate(itemUIPrefab);
-                itemUI.transform.SetParent(items);
+                itemUI.transform.SetParent(items, false);
                 itemUI.index = i;
                 itemUI.itemName = data.name;
                 itemUI.itemSprite = data.icon;
@@ -51,7 +52,9 @@ public class ShopManager : SingleTon<ShopManager>
             }
             else
             {
-                Instantiate(lackOfMoneyUI); // µ∑ ∫Œ¡∑ UI
+                GameObject denyobject = Instantiate(lackOfMoneyUI); // µ∑ ∫Œ¡∑ UI
+                DenyUI denyUI = denyobject.GetComponent<DenyUI>();
+                denyUI.text = "Not Enough Money!";
             }
         }
     }

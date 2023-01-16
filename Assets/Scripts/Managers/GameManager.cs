@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingleTon<GameManager>
 {
@@ -83,5 +84,20 @@ public class GameManager : SingleTon<GameManager>
             inventory?.SetActive(!inventory.activeSelf);
             inventoryOpened = inventory.activeSelf;
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

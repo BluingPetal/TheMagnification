@@ -90,6 +90,35 @@ public class InventoryManager : SingleTon<InventoryManager>
         }
     }
 
+    public void UseItem(string name)
+    {
+        AcquiredItem item = InventoryDictionary[name];
+
+        if (InventoryDictionary[name].itemNum > 0)
+        {
+            item.itemUI.isSelected = true;
+        }
+    }
+
+    public void BuiltItem(string name)
+    {
+        // UI 설정
+        AcquiredItem item = InventoryDictionary[name];
+
+        if (InventoryDictionary[name].itemNum > 0)
+        {
+            InventoryDictionary[name].itemUI.Num = --item.itemNum;
+            InventoryDictionary[name] = item;
+        }
+
+        item.itemUI.isSelected = false;
+
+        // item이 다 소모되었을 경우
+        if (InventoryDictionary[name].itemNum <= 0)
+        {
+            InventoryDictionary[name].itemUI.Num = 0;
+        }
+    }
 
     public struct AcquiredItem
     {

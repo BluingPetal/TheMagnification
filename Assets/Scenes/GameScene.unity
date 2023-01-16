@@ -1281,7 +1281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6fe9580bd67b34580977e0aa4eab9755, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1319,7 +1319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110296974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.3, y: 3.94, z: -86.1}
+  m_LocalPosition: {x: -5.67, y: 3.94, z: -70.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11552,7 +11552,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7103
+    m_Bits: 15295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -12049,7 +12049,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 951
+    m_Bits: 15295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 2c5faade0b154dc4a8bf90f7d734b803, type: 2}
   m_TargetDisplay: 0
@@ -20171,7 +20171,7 @@ MonoBehaviour:
   m_Content: {fileID: 2109426009}
   m_Horizontal: 1
   m_Vertical: 0
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -20594,7 +20594,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a33edf12f3c0044e8ba582a16ddaae3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20841,8 +20841,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlaceableDatas:
-  - {fileID: 11400000, guid: 7af146aa8602ff74bbc6ce25a63905b6, type: 2}
-  - {fileID: 11400000, guid: 071547505a3d36d4892fc5108788a4a2, type: 2}
+  - {fileID: 11400000, guid: 585f1bf1fa3f3ca48b903c4d4b550327, type: 2}
+  - {fileID: 11400000, guid: c44fc3e241b59864e94bbcadf3ed5993, type: 2}
   ghostMaterial: {fileID: 2100000, guid: 6fe9580bd67b34580977e0aa4eab9755, type: 2}
   banMaterial: {fileID: 2100000, guid: a33edf12f3c0044e8ba582a16ddaae3f, type: 2}
   selectedPlace: {fileID: 0}

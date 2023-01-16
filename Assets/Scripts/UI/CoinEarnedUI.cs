@@ -12,9 +12,17 @@ public class CoinEarnedUI : MonoBehaviour
     [SerializeField]
     private float alphaSpeed;
 
+    private Transform playerStatUITransform;
+
+    private void Awake()
+    {
+        playerStatUITransform = GameObject.Find("PlayerStatPanel").transform;
+    }
+
     private void Start()
     {
         Destroy(gameObject, 1f);
+        transform.position = playerStatUITransform.position + new Vector3(200, 0, 0);
     }
 
     private void Update()

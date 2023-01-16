@@ -13,16 +13,7 @@ public class InventoryItemSelectUI : MonoBehaviour
     [HideInInspector]
     public string itemName; // 설정해주기
 
-    //[SerializeField]
-    //private GameObject sellUIPrefab;
-
     private Vector3 offsetWithParent;
-    //private Transform sellUIContainer;
-
-    //private void Awake()
-    //{
-    //    sellUIContainer = GameObject.Find("InventoryCanvas").transform.GetChild(1);
-    //}
 
     private void Start()
     {
@@ -38,18 +29,13 @@ public class InventoryItemSelectUI : MonoBehaviour
     public void OnButtonSelect()
     {
         Destroy(this.gameObject);
-
+        InventoryManager.Instance.UseItem(keyName);
     }
 
     public void OnButtonSell()
     {
         Destroy(this.gameObject);
         InventoryManager.Instance.SellItem(keyName);
-        //GameObject sellUI = Instantiate(sellUIPrefab);
-        //sellUI.transform.SetParent(sellUIContainer);
-        //ConfirmUI ui = sellUI.GetComponent<ConfirmUI>();
-        //ui.itemName = 
-
     }
 
     public void OnButtonCancel()

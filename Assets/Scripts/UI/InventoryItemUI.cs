@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItemUI : MonoBehaviour
+public class InventoryItemUI : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     private Image itemIcon;
@@ -18,6 +19,8 @@ public class InventoryItemUI : MonoBehaviour
     public Sprite icon;
     [HideInInspector]
     public string keyName;
+    [HideInInspector]
+    public bool isSelected;
 
     private int num;
     private Transform itemSelectedUIContainer;
@@ -41,11 +44,13 @@ public class InventoryItemUI : MonoBehaviour
     private void Start()
     {
         itemIcon.sprite = icon;
+        isSelected = false;
     }
 
     private void OnDisable()
     {
         DestroyItemSelectedUI();
+        isSelected = false;
     }
 
     public void InventoryItemSelected()
@@ -64,5 +69,16 @@ public class InventoryItemUI : MonoBehaviour
     {
         if (itemSelectedUIContainer.childCount > 0)
             Destroy(itemSelectedUIContainer.GetChild(0).gameObject);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if(isSelected)
+            SelectTower();
+    }
+
+    private void SelectTower()
+    {
+        BuildManager.Instance.InstantiateTower(icon);
     }
 }

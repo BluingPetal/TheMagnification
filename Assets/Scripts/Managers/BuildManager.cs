@@ -28,9 +28,9 @@ public class BuildManager : SingleTon<BuildManager>
         instantiatedPrefab = null;
     }
 
-    public void InstantiateTower(Sprite uiSprite, out int cost)
+    public void InstantiateTower(Sprite uiSprite)
     {
-        selectedPlaceableObj = FoundTower(uiSprite, out cost);
+        selectedPlaceableObj = FoundTower(uiSprite);
 
         if (CalculateHitPos() != Vector3.zero)
         {
@@ -42,29 +42,16 @@ public class BuildManager : SingleTon<BuildManager>
         else DoneSelected();
     }
 
-    public GameObject FoundTower(Sprite uiSprite, out int cost)
+    public GameObject FoundTower(Sprite uiSprite)
     {
-        cost = 0;
         for (int i = 0; i < PlaceableDatas.Count; i++)
         {
             // TODO : PlaceableObject √ﬂ∞°«œ±‚
-            if (PlaceableDatas[i] is MachineGunData)
+            if (PlaceableDatas[i] is ShootTowerData)
             {
-                MachineGunData data = PlaceableDatas[i] as MachineGunData;
-                if (data.icon == uiSprite)
+                ShootTowerData data = PlaceableDatas[i] as ShootTowerData;
+                if(data.icon == uiSprite)
                 {
-                    //selectedPlaceableObj = data.prefab;
-                    cost = data.level1_cost;
-                    return data.prefab;
-                }
-            }
-            else if (PlaceableDatas[i] is RocketData)
-            {
-                RocketData data = PlaceableDatas[i] as RocketData;
-                if (data.icon == uiSprite)
-                {
-                    //selectedPlaceableObj = data.prefab;
-                    cost = data.level1_cost;
                     return data.prefab;
                 }
             }
@@ -131,6 +118,7 @@ public class BuildManager : SingleTon<BuildManager>
         GameObject installedObj = Instantiate(selectedPlaceableObj, selectedPlace.transform.position, selectedPlace.transform.rotation);
         selectedPlace.isOccupied = true;
         installedObj.GetComponent<PlaceableObject>().isInstalled = true;
+        InventoryManager.Instance.BuiltItem(installedObj.GetComponent<PlaceableObject>().Name);
 
         // cost∏∏≈≠ µ∑ ª©¡÷±‚
         //PlayerStatManager.Instance.MoneyChange(-installedObj.GetComponent<PlaceableObject>().Cost);

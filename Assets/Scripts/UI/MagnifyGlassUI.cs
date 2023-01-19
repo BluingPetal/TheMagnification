@@ -26,9 +26,4 @@ public class MagnifyGlassUI : MonoBehaviour
             glassOnEvent?.Invoke();
         }
     }
-
-    private void OnMouseOver()
-    {
-        
-    }
 }

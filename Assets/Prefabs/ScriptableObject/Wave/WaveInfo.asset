@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0371658c2ec112438ece68c09431c49, type: 3}
+  m_Name: WaveInfo
+  m_EditorClassIdentifier: 
+  Wave1:
+  - num: 3
+    obj: {fileID: 7564139945791324055, guid: 3fbc80649ca82e5408f52316adc9daf9, type: 3}
+    type: people
+  - num: 4
+    obj: {fileID: 5123119815658249043, guid: d9f644800a1d3684ab860f7f1e71012d, type: 3}
+    type: people
+  Wave2:
+  - num: 5
+    obj: {fileID: 7564139945791324055, guid: 3fbc80649ca82e5408f52316adc9daf9, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 5123119815658249043, guid: d9f644800a1d3684ab860f7f1e71012d, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  Wave3:
+  - num: 5
+    obj: {fileID: 7564139945791324055, guid: 3fbc80649ca82e5408f52316adc9daf9, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 5123119815658249043, guid: d9f644800a1d3684ab860f7f1e71012d, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 1
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  Wave4:
+  - num: 10
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 1
+    obj: {fileID: 951237842023775916, guid: 24f333307f42014488e8d85f5e685d37, type: 3}
+    type: car
+  Wave5:
+  - num: 5
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 951237842023775916, guid: 24f333307f42014488e8d85f5e685d37, type: 3}
+    type: car
+  - num: 1
+    obj: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+    type: car
+  Wave6:
+  - num: 2
+    obj: {fileID: 7564139945791324055, guid: 3fbc80649ca82e5408f52316adc9daf9, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 5123119815658249043, guid: d9f644800a1d3684ab860f7f1e71012d, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 951237842023775916, guid: 24f333307f42014488e8d85f5e685d37, type: 3}
+    type: car
+  - num: 2
+    obj: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+    type: car
+  - num: 1
+    obj: {fileID: 3922601976980333509, guid: 367eb2237829138419f0b80b0480fbb2, type: 3}
+    type: car
+  Wave7:
+  - num: 10
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 10
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+    type: car
+  - num: 2
+    obj: {fileID: 3922601976980333509, guid: 367eb2237829138419f0b80b0480fbb2, type: 3}
+    type: car
+  - num: 1
+    obj: {fileID: 2384400745289014320, guid: 27c24d987f96af9478fa31938b7bf12d, type: 3}
+    type: car
+  Wave8:
+  - num: 5
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 3
+    obj: {fileID: 951237842023775916, guid: 24f333307f42014488e8d85f5e685d37, type: 3}
+    type: car
+  - num: 3
+    obj: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+    type: car
+  - num: 3
+    obj: {fileID: 3922601976980333509, guid: 367eb2237829138419f0b80b0480fbb2, type: 3}
+    type: car
+  - num: 3
+    obj: {fileID: 2384400745289014320, guid: 27c24d987f96af9478fa31938b7bf12d, type: 3}
+    type: car
+  Wave9:
+  - num: 10
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 10
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+    type: car
+  - num: 5
+    obj: {fileID: 3922601976980333509, guid: 367eb2237829138419f0b80b0480fbb2, type: 3}
+    type: car
+  - num: 5
+    obj: {fileID: 2384400745289014320, guid: 27c24d987f96af9478fa31938b7bf12d, type: 3}
+    type: car
+  Wave10:
+  - num: 5
+    obj: {fileID: 7564139945791324055, guid: 3fbc80649ca82e5408f52316adc9daf9, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 5123119815658249043, guid: d9f644800a1d3684ab860f7f1e71012d, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 2726485007920497760, guid: b3e33ac1bff392f49a1148fe02189ec6, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 3398858525392162667, guid: 8cb9584cb1722ef4498cbeb180c7886f, type: 3}
+    type: people
+  - num: 5
+    obj: {fileID: 951237842023775916, guid: 24f333307f42014488e8d85f5e685d37, type: 3}
+    type: car
+  - num: 5
+    obj: {fileID: 8557838386627401606, guid: d3fc6048140ba004698302850576ce37, type: 3}
+    type: car
+  - num: 5
+    obj: {fileID: 3922601976980333509, guid: 367eb2237829138419f0b80b0480fbb2, type: 3}
+    type: car
+  - num: 5
+    obj: {fileID: 2384400745289014320, guid: 27c24d987f96af9478fa31938b7bf12d, type: 3}
+    type: car
+  - num: 1
+    obj: {fileID: 6617507906417772439, guid: 807a03c3ed98e444e85e11d135c8a082, type: 3}
+    type: car

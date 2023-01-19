@@ -8,12 +8,10 @@ using UnityEngine.SubsystemsImplementation;
 
 public class WaveManager : SingleTon<WaveManager>
 {
-    // wave마다 나올 enemy 정해주기
-    [Header("Waves")]
     [SerializeField]
-    private List<ObjectInfo> Wave1;
+    WaveData data;
     [SerializeField]
-    private List<ObjectInfo> Wave2;
+    private List<List<ObjectInfo>> Waves;
 
     [Header("Settings")]
     [SerializeField]
@@ -32,9 +30,24 @@ public class WaveManager : SingleTon<WaveManager>
     private void Awake()
     {
         curWave = 0;
+        Waves = new List<List<ObjectInfo>>();
         CurWaveObj = new Queue<GameObject>();
         SpawnedObj = new List<GameObject>();
         respawnTime = new WaitForSeconds(routine);
+    }
+
+    private void Start()
+    {
+        Waves.Add(data.Wave1);
+        Waves.Add(data.Wave2);
+        Waves.Add(data.Wave3);
+        Waves.Add(data.Wave4);
+        Waves.Add(data.Wave5);
+        Waves.Add(data.Wave6);
+        Waves.Add(data.Wave7);
+        Waves.Add(data.Wave8);
+        Waves.Add(data.Wave9);
+        Waves.Add(data.Wave10);
     }
 
     public void GoToNextWave()
@@ -61,28 +74,17 @@ public class WaveManager : SingleTon<WaveManager>
     private void WaveStart()
     {
         // TODO : wave가 모두 끝났을 때 엔딩 추가
-        curWave++;
-        OnWaveChanged?.Invoke(curWave);
+        OnWaveChanged?.Invoke(curWave + 1);
 
-        switch (curWave)
+        for (int i = 0; i < Waves[curWave].Count; i++)
         {
-            case 1:
-                for (int i = 0; i < Wave1.Count; i++)
-                {
-                    for (int j = 0; j < Wave1[i].num; j++)
-                        CurWaveObj.Enqueue(Wave1[i].obj);
-                }
-                break;
-            case 2:
-                for (int i = 0; i < Wave2.Count; i++)
-                {
-                    for (int j = 0; j < Wave2[i].num; j++)
-                        CurWaveObj.Enqueue(Wave2[i].obj);
-                }
-                break;
+            for (int j = 0; j < Waves[curWave][i].num; j++)
+                CurWaveObj.Enqueue(Waves[curWave][i].obj);
         }
 
         respawnCoroutine = StartCoroutine(Spawn());
+
+        curWave++;
     }
 
     private IEnumerator Spawn()
@@ -123,13 +125,5 @@ public class WaveManager : SingleTon<WaveManager>
             Destroy(SpawnedObj[i]);
         }
         SpawnedObj.Clear();
-    }
-
-    [Serializable]
-    public struct ObjectInfo
-    {
-        public int num;
-        public GameObject obj;
-        public string type;
     }
 }

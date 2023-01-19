@@ -10,12 +10,12 @@ public class PausedMenuUI : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void Restart()
-    {
-        GameManager.Instance.ChangeScene("GameScene");
-        Destroy(this.gameObject);
-        // TODO : 초기화 필요
-    }
+    //public void Restart()
+    //{
+    //    GameManager.Instance.ChangeScene("GameScene");
+    //    Destroy(this.gameObject);
+    //    // TODO : 초기화 필요
+    //}
 
     public void ToTitle()
     {

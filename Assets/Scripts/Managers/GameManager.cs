@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -25,10 +26,13 @@ public class GameManager : SingleTon<GameManager>
 
     private void Start()
     {
-        WaveTime = 10;
+        WaveTime = waveTime;
         shopOpened = false;
         inventoryOpened = false;
         StartCoroutine(GoToNextWave());
+        ShopManager.Instance.Setting();
+        ShopManager.Instance.SetUI();
+        InventoryManager.Instance.Setting();
     }
 
     public void CheckIfWaveDone()
@@ -50,7 +54,7 @@ public class GameManager : SingleTon<GameManager>
         }
 
         WaveManager.Instance.GoToNextWave();
-        WaveTime = 10;
+        WaveTime = waveTime;
         // after 활성화, before 비활성화 
         OnWaveChanged?.Invoke();
     }
@@ -99,5 +103,20 @@ public class GameManager : SingleTon<GameManager>
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        //if(sceneName == "GameScene")
+        //{
+        //    GameSceneStart();
+        //}
     }
+
+    //private void GameSceneStart()
+    //{
+    //    WaveTime = waveTime;
+    //    shopOpened = false;
+    //    inventoryOpened = false;
+    //    StartCoroutine(GoToNextWave());
+    //    ShopManager.Instance.Setting();
+    //    ShopManager.Instance.SetUI();
+    //    InventoryManager.Instance.Setting();
+    //}
 }

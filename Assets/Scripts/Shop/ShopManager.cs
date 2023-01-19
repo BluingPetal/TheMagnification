@@ -9,18 +9,18 @@ public class ShopManager : SingleTon<ShopManager>
     [SerializeField]
     private List<ScriptableObject> ItemDataList;    // 사용아이템과 배치 아이템을 살 수 있음
     [SerializeField]
-    private Transform items;                        // 아이템을 보관하는 상점 컨테이너 UI
-    [SerializeField]
     private ItemUI itemUIPrefab;                    // 아이템을 띄워줄 UI
     [SerializeField]
     private GameObject lackOfMoneyUI;               // 돈 부족 UI
 
-    private void Start()
+    private Transform items;                        // 아이템을 보관하는 상점 컨테이너 UI
+
+    public void Setting()
     {
-        SetUI();
+        items = GameObject.Find("ShopCanvas").transform.GetChild(0).GetChild(3).GetChild(0);
     }
 
-    private void SetUI()
+    public void SetUI()
     {
         for(int i = 0; i < ItemDataList.Count; i++)
         {

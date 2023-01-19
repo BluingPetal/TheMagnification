@@ -144,8 +144,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: num
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b4b3c72ec5a5434bbe5b4601986b5af, type: 2}
-  m_sharedMaterial: {fileID: 2727895418185693175, guid: 0b4b3c72ec5a5434bbe5b4601986b5af,
+  m_fontAsset: {fileID: 11400000, guid: c41313a330804a04d8d7b0d60f00a25c, type: 2}
+  m_sharedMaterial: {fileID: 6672480076317785042, guid: c41313a330804a04d8d7b0d60f00a25c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -309,6 +309,8 @@ MonoBehaviour:
   selectedItemUIPrefab: {fileID: 6616802465486344189, guid: 4305fe6d57e13554ea7cc19fa709051a,
     type: 3}
   icon: {fileID: 0}
+  keyName: 
+  isSelected: 0
 --- !u!114 &3148129465087943839
 MonoBehaviour:
   m_ObjectHideFlags: 0

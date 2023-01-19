@@ -28,6 +28,13 @@ public class BuildManager : SingleTon<BuildManager>
         instantiatedPrefab = null;
     }
 
+    public void Setting()
+    {
+        selectedPlace = null;
+        selectedPlaceableObj = null;
+        instantiatedPrefab = null;
+    }
+
     public void InstantiateTower(Sprite uiSprite)
     {
         selectedPlaceableObj = FoundTower(uiSprite);

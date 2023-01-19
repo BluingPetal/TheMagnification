@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Android.Types;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PoliceWithPoleEventor : MonoBehaviour
+public class EnemyAnimationEventor : MonoBehaviour
 {
     public UnityEvent OnAttack;
 
